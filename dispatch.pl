@@ -26,7 +26,7 @@ while(my $path = <FD>) {
     chomp $path;
     next if $path !~ m/^\/.*$/;
     my $npath = parse($path);
-    print "Restoring $npath to $npath.\n";
+    print "Restoring $npath to $path.\n";
 
     open FDIN, '<:encoding(UTF-8)', $npath or (warn "Coudln't read $npath.\n" and next);
     if(not open FDOUT, '>:encoding(UTF-8)', $path) {
@@ -57,6 +57,21 @@ sub parse {
     if($path =~ m/^\/(.*)$/) {
         $path = $1;
     }
+
+    my $dir;
+    my $file;
+    if($path =~ m/^(.*)\/([^\/]*)$/) {
+        $dir = $1;
+        $file = $2;
+    } else {
+        $dir = ".";
+        $file = $path;
+    }
+
+    if($file =~ m/^\.(.*)$/) {
+        $file = $1;
+    }
+    $path = "$dir/$file";
     return $path;
 }
 

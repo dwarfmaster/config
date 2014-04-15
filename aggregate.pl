@@ -65,6 +65,10 @@ sub parse {
         $file = $2;
         mkdir($dir, 0777) unless (-d $dir);
     }
+    if($file =~ m/^\.(.*)$/) {
+        $file = $1;
+    }
+    $path = "$dir/$file";
 
     return $path;
 }
