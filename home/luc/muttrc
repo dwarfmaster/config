@@ -1,0 +1,95 @@
+# ~/.muttrc
+# Mutt (MUA) configuration
+
+set editor=/usr/bin/vim
+set use_envelope_from=yes
+set envelope_from_address="MAIL1"
+set sendmail=/home/LOG1/Prog/nm_sendmail
+set header_cache=/home/LOG1/.mutt/cache/
+
+# Folder
+set folder=
+
+# Contacts
+set query_command="abook --mutt-query '%s'"
+macro index,pager a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+macro index,pager \ca "<shell-escape>abook<enter>" "Launch abook."
+macro editor <tab> "<complete-query>" "Complete emails from contacts."
+
+# Editing headers with vim
+set edit_headers=yes
+my_hdr From: MAIL1
+my_hdr X-Info: Keep It Simple, Stupid.
+
+# Display
+color normal     white black
+color indicator  white blue
+color status     white blue
+color hdrdefault white blue
+color error      white red
+color attachment brightgreen black
+color header     black green "^Tags:.*$"
+color quoted     cyan  black
+color signature  white blue
+
+# Pager config
+bind pager <up> previous-line
+bind pager <down> next-line
+bind pager p previous-entry
+bind pager n next-entry
+bind pager [ previous-unread
+bind pager ] next-unread
+
+# Index config
+set sort=threads
+
+# Notmuch integration
+set nm_default_uri="notmuch:///home/LOG1/mail/
+set virtual_spoolfile=yes
+virtual-mailboxes \
+    "INBOX"    "notmuch://?query=tag:inbox" \
+    "All"      "notmuch://?query=folder:default" \
+    "Dwarves"  "notmuch://?query=tag:dwarves%20or%20tag:warrior" \
+    "Lists"    "notmuch://?query=tag:list" \
+    "Starred"  "notmuch://?query=tag:star" \
+    "Spam"     "notmuch://?query=tag:spam" \
+    "Deleted"  "notmuch://?query=tag:deleted"
+
+# Notmuch bindings
+macro index / "<vfolder-from-query>" "Looks up a hand made query."
+macro index,pager E "<modify-labels>" "Edit labels of a mail."
+macro index,pager A "<modify-labels>+archive -unread -inbox<enter>" "Archive a mail."
+macro index,pager I "<modify-labels>-inbox -unread<enter>" "Remove from inbox."
+macro index,pager d "<modify-labels>+deleted -inbox<enter>" "Mark a mail as deleted."
+macro index,pager u "<modify-labels>-deleted<enter>" "Undelete a mail."
+macro index,pager + "<modify-labels>+*<enter><sync-mailbox><enter>" "Star a mail."
+macro index,pager - "<modify-labels>-*<enter><sync-mailbox><enter>" "Unstar a mail."
+
+# Sidebar
+set sidebar_width=20
+set sidebar_visible=yes
+bind index,pager <left>  sidebar-prev
+bind index,pager <right> sidebar-next
+bind index,pager <space> sidebar-open
+
+# Encryption, PGP integration
+set pgp_decode_command="gpg %?p? --passphrase-fd 0? --no-verbose --batch --output - %f"
+set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
+set pgp_decrypt_command="gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
+set pgp_sign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --detach-sign --textmode %?a?-u %a? %f"
+set pgp_clearsign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
+set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0xFF08797d -- -r %r -- %f"
+set pgp_encrypt_sign_command="pgpewrap gpg --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0xFF08797D -- -r %r -- %f"
+set pgp_import_command="gpg --no-verbose --import -v %f"
+set pgp_export_command="gpg --no-verbose --export --armor %r"
+set pgp_verify_key_command="gpg --no-verbose --batch --fingerprint --check-sigs %r"
+set pgp_list_pubring_command="gpg --no-verbose --batch --with-colons --list-keys %r"
+set pgp_list_secring_command="gpg --no-verbose --batch --with-colons --list-secret-keys %r"
+set pgp_good_sign="^gpg: Good signature from"
+set crypt_replysign=yes
+set crypt_replyencrypt=yes
+set pgp_sign_as="0xFF08797D"
+set pgp_verify_sig=yes
+set pgp_timeout=60
+set pgp_autosign=yes
+

@@ -1,0 +1,20 @@
+VERBOSE=no
+SHELL=/bin/sh
+PATH=/bin:/usr/bin:/usr/local/bin
+
+MAILDIR=/home/LOG1/mail
+DEFAULT=$MAILDIR/default/
+ORGMAIL=$MAILDIR/emergency/
+LOGFILE=$MAILDIR/procmail.log
+
+# Rules
+# Handle pwmt mailing list
+:0:notmuch.lock
+* ^From:.*@lists.pwmt.org
+| notmuch-deliver -v -t list -t pwmt default
+
+# Add mail with notmuch
+:0:notmuch.lock
+* .*
+| notmuch-deliver -v default
+
