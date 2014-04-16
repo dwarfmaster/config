@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Launch mutt
+mutt
+
+# Do some clean up on exit.
+notmuch tag '-*' -- folder:default
+notmuch tag +deleted -- tag:spam
+

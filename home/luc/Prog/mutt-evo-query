@@ -1,0 +1,21 @@
+#!/bin/perl
+use strict;
+use warnings;
+
+# Executing the command and getting the output.
+my @command = split ' ',"abook --mutt-query";
+open FD, ">>/tmp/mutt_complete_history";
+for my $elem (@ARGV) {
+    push @command,$elem if not $elem =~ m/^-/;
+    print FD "$elem\n";
+}
+close FD;
+my $cmd = join ' ',@command;
+my @results = split '\n',`$cmd`;
+
+#Parsing and printing the output.
+for my $line (@results) {
+    my @parts = split "\t",$line;
+    print "$parts[1] <$parts[0]>\n" if $parts[0] and $parts[1];
+}
+

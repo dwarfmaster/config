@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ $# == 0 ]
+then
+    exit 1
+fi
+
+args=
+while [ $# -ge 1 ]
+do
+    args="$args $1"
+    shift
+done
+uzbl-browser $args > /dev/null 2>&1 &
+
