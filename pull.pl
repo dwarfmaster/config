@@ -2,14 +2,13 @@
 
 use warnings;
 use strict;
-use autodie;
 
 # Configuration
 my $config_list = "cfglist";
 my $to_hide     = "tohide";
 
 # Reading the words to hide
-open FD, '<:encoding(UTF-8)', $to_hide or die "Couldn't read $to_hide.";
+open FD, '<:encoding(UTF-8)', $to_hide or die "Couldn't read $to_hide : \"$!\"";
 my %hidden;
 my $line;
 while($line = <FD>) {
@@ -22,16 +21,16 @@ close FD;
 my @sorted_keys = reverse sort { sort_by_length($a, $b) } keys %hidden;
 
 # Reading the config list
-open FD, '<:encoding(UTF-8)', $config_list or die "Couldn't open $config_list.";
+open FD, '<:encoding(UTF-8)', $config_list or die "Couldn't open $config_list : \"$!\"";
 while(my $path = <FD>) {
     chomp $path;
     next if $path !~ m/^\/.*$/;
     my $npath = parse($path);
     print "Saving $path to $npath.\n";
 
-    open FDIN, '<:encoding(UTF-8)', $path or (warn "Coudln't read $path.\n" and next);
+    open FDIN, '<:encoding(UTF-8)', $path or (warn "Coudln't read $path : \"$!\"" and next);
     if(not open FDOUT, '>:encoding(UTF-8)', $npath) {
-        warn "Couldn't open $npath for save.";
+        warn "Couldn't open $npath for save : \"$!\"";
         close FDIN;
         next;
     }
