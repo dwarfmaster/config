@@ -1,0 +1,36 @@
+# export GTK2_RC_FILES= »$HOME/.gtkrc-2.0
+
+xrandr --output LVDS --auto --primary --output HDMI-0 --auto --right-of LVDS
+xmodmap -e "keycode 135 = Super_L" # reassigne 'clic droit' du clavier à la touche super
+xmodmap -e "keycode 65 = space space space space" # réassigne shift+espace à 4 espaces
+xset b off
+synclient tapButton1=0
+numlockx # Enable numlock
+
+if [ $# -eq 0 ]
+then
+	DEFAULT_SESSION=dwm
+else
+	DEFAULT_SESSION=$1
+fi
+
+case $DEFAULT_SESSION in
+	openbox)	exec openbox-session;;
+	awesome)	exec awesome;;
+	wmii)		exec wmii;;
+	dwm)		
+		conky | while read -r; do xsetroot -name "$REPLY"; done &
+		mpd /home/LOG1/.mpdconf &
+		twmnd &
+		feh --bg-scale /home/LOG1/Images/bg.png &
+		exec dwm
+		;;
+	dwmabr)		exec $DWMABRPATH/dwmabr;;
+	dwmfifo)
+		sxhkd -c ~/.sxhkd &
+		feh --bg-scale /home/LOG1/Images/bg.png &
+		exec $DWMFIFOPATH/dwm
+		;;
+	*)		exit;;
+esac
+

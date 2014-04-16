@@ -1,0 +1,57 @@
+# Configuration file for urxvt
+
+! Couleur d'arrière plan
+urxvt*background : black
+! Couleur du texte
+urxvt*foreground : white
+urxvt*transparent : true
+! font
+! urxvt.font : xft:FreeMono:style=Gras:pixelsize=12
+! urxvt.boldFont : xft:FreeMono:style=Bold:pixelsize=14
+urxvt.font : -*-terminal-medium-r-*-*-14-*-*-*-*-*-iso8859-*
+urxvt.boldFont : -*-terminal-bold-r-*-*-14-*-*-*-*-*-iso8859-*
+! Valeur de la transparence 0-100 assombrit 100-200 éclaircit
+urxvt*shading : 0
+! Couleur de teinte du fond
+urxvt*tint : black
+! On supprime la scrollBar
+urxvt*scrollBar : false
+! On sauvegarde 1000 lignes
+urxvt*saveLines : 1000
+! Couleurs
+urxvt*color0  : Black
+urxvt*color1  : Red3
+urxvt*color2  : Green3
+urxvt*color3  : Yellow3
+urxvt*color4  : Blue3
+urxvt*color5  : Magenta3
+urxvt*color6  : Cyan3
+urxvt*color7  : AntiqueWhite
+urxvt*color8  : Grey25
+urxvt*color9  : Red
+urxvt*color10 : Green
+urxvt*color11 : Yellow
+urxvt*color12 : Blue
+urxvt*color13 : Magenta
+urxvt*color14 : Cyan
+urxvt*color15 : White
+! Perl scripts
+urxvt.perl-ext-common : default,matcher,vtwheel,clipboard
+
+! Liens clickables
+urxvt.perl-ext : default,url-select
+urxvt.keysym.M-a : perl:url-select:select_next
+urxvt.urlLauncher : /home/LOG1/Prog/uzbl-launcher
+urxvt.url-select.launcher : /home/LOG1/Prog/uzbl-launcher
+urxvt.url-select.underline : true
+urxvt.matcher.button : 1
+
+! Clipboard configuration
+urxvt.keysym.M-c : perl:clipboard:copy
+urxvt.keysym.M-v : perl:clipboard:paste
+urxvt.clipboard.autocopy : true
+urxvt.clipboard.copycmd : xsel -ib
+urxvt.clipboard.pastecmd : xsel -ob
+
+! TODO : Home and end keys
+

@@ -1,0 +1,84 @@
+# History configuration
+HISTFILE=~/.histfile
+HISTSIZE=2000
+SAVEHIST=2000
+
+# Global settings
+setopt appendhistory autocd extendedglob
+unsetopt beep notify nomatch
+bindkey -e
+
+# Style
+zstyle :compinstall filename '/home/LOG1/.zshrc'
+zstyle ':completion:*' menu select
+
+# Prompt
+autoload -U promptinit
+promptinit
+
+plugins=(git)
+ZSH_THEME=fox
+ZSH=/usr/share/oh-my-zsh/
+source $ZSH/oh-my-zsh.sh
+
+# Completion
+autoload -Uz compinit
+compinit
+# Ne propose pas deux fois le même élément sur la ligne pour cp, mv et rm
+zstyle ':completion:*:rm:*' ignore-line yes
+zstyle ':completion:*:mv:*' ignore-line yes
+zstyle ':completion:*:cp:*' ignore-line yes
+
+# Aliases
+alias ls='ls --color=auto'
+alias ll='ls -lrthF'
+alias lla='ll -A'
+alias llp='ll *.*pp'
+alias llpp='llp'
+alias llcp='ll *.cpp'
+alias llh='ll *.hpp'
+alias llhp='ls *.hpp'
+alias llc='ll *.c *.h'
+alias lldev='ll /dev/sd*'
+alias lld='lldev'
+alias upbox='openbox --reconfigure'
+alias terminal='gnome-terminal'
+alias rm='rm --preserve-root -i'
+alias nmap='nmap -T4 -A -v'
+alias nautilus='nautilus --no-desktop'
+alias minecraft='java -jar $HOME/Documents/games/minecraft/minecraft.jar'
+alias gitrlg='git log --pretty=format:"%Cred%h%Creset (%Cgreen%cn%Creset)%Cgreen%d%Creset %s [%Cgreen%cr%Creset]" --graph'
+alias gitrlg-nc='git log --pretty=format:"%h (%cn)%d %s [%cr]" --graph'
+alias rsensors='while [ true ]; do clear && sensors && sleep 1; done'
+alias extend_screen='xrandr --output LVDS --mode 1600x900 --pos 0x0 --output HDMI-0 --mode 1920x1080 --pos 1600x0'
+alias scan='simple-scan'
+alias sudo='nocorrect sudo'
+alias .='pwd'
+alias keycode="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
+alias mpc='mpc -p 6666'
+alias sl='/usr/bin/sl'
+alias grep='grep -n'
+alias archey='cat ~/.archey'
+alias mutt="/home/LOG1/Prog/mutt-launcher"
+
+# Les variables globales
+export EDITOR=vim
+export PATH=$PATH:$HOME/Prog
+export PATH=$PATH:/opt/android-sdk/platform-tools/
+export PATH=$PATH:$HOME/Prog/android-dev/
+export PATH=$PATH:/usr/share/java/apache-ant/bin/
+export PATH=$PATH:/opt/weidu/
+export PATH=$PATH:$HOME/Prog/vimpager
+export TERMINAL="gnome-terminal"
+export LD_LIBRARY_PATH=$HOME/libs/:$LD_LIBRARY_PATH
+export WINEARCH=win32
+export DWMABRPATH=/home/LOG1/Log/programmation/c-cpp/x11/dwmabr/bin/Debug/
+export DWMFIFOPATH=/home/LOG1/Log/programmation/c-cpp/x11/dwmfifo/dwm/
+export MANPAGER="/usr/bin/most -s" # manpage en couleur
+export MAILDIR="/home/LOG1/mail"
+export XDG_DOWNLOAD_DIR="/home/LOG1/Download/"
+
+# Affichage de bienvenue
+cat /home/LOG1/.archey
+archey3 > .archey 2> /dev/null &
+
