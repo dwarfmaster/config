@@ -61,8 +61,12 @@ sub parse {
     my $dir = ".";
     my $file = $path;
     while($file =~ m/^([^\/]*)\/(.*)$/) {
-        $dir = "$dir/$1";
+        my $sub = $1;
         $file = $2;
+        if($1 =~ m/^\.(.*)$/) {
+            $sub = $1;
+        }
+        $dir = "$dir/$sub";
         mkdir($dir, 0777) unless (-d $dir);
     }
     if($file =~ m/^\.(.*)$/) {

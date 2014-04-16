@@ -63,6 +63,7 @@ sub parse {
     if($path =~ m/^(.*)\/([^\/]*)$/) {
         $dir = $1;
         $file = $2;
+        $dir =~ s/\/\./\//g;
     } else {
         $dir = ".";
         $file = $path;
