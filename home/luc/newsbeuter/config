@@ -1,0 +1,5 @@
+browser /home/LOG1/Prog/uzbl-launcher
+display-article-progress no
+error-log "~/.newsbeuter/error.log"
+goto-next-feed no
+
