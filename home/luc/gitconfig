@@ -1,0 +1,20 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[user]
+	name = LOG2
+	email = MAIL1
+	signingkey = FF08797D
+
+[alias]
+	co = checkout
+	st = status
+	br = branch
+	ci = commit
+	lg = shortlog
+
+[credential]
+	helper = cache
+[push]
+	default = matching
