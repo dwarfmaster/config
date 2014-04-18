@@ -26,6 +26,11 @@ LOGFILE=$MAILDIR/procmail.log
 * ^(From|To):.*arch-general@archlinux.org
 | notmuch-deliver -v -t list -t archlinux -t arch-general default
 
+# Handle git mailing list
+:0:notmuch.lock
+* ^(From|To|Cc):.*git@vger.kernel.org
+| notmuch-deliver -v -t list -t git default
+
 # Add mail with notmuch
 :0:notmuch.lock
 * .*
