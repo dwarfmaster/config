@@ -11,7 +11,7 @@ LOGFILE=$MAILDIR/procmail.log
 # Handle pwmt mailing list
 :0:notmuch.lock
 * ^(From|To):.*@lists.pwmt.org
-| notmuch-deliver -v -t list -t pwmt default
+| notmuch-deliver -v -t list -t pwmt -r inbox default
 
 # Handle archlinux.org mailing lists
 :0:notmuch.lock
@@ -24,12 +24,12 @@ LOGFILE=$MAILDIR/procmail.log
 
 :0:notmuch.lock
 * ^(From|To):.*arch-general@archlinux.org
-| notmuch-deliver -v -t list -t archlinux -t arch-general default
+| notmuch-deliver -v -t list -t archlinux -t arch-general -r inbox default
 
 # Handle git mailing list
 :0:notmuch.lock
 * ^(From|To|Cc):.*git@vger.kernel.org
-| notmuch-deliver -v -t list -t git default
+| notmuch-deliver -v -t list -t git -r inbox default
 
 # Add mail with notmuch
 :0:notmuch.lock
