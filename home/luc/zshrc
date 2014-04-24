@@ -81,13 +81,12 @@ export XDG_DOWNLOAD_DIR="/home/LOG1/Download/"
 export GPG_TTY=`tty`
 
 # Launching gpg-agent
-if [ -f "$HOME/.gpg-agent-info" ]; then
-    source "$HOME/.gpg-agent-info"
-    export GPG_AGENT_INFO
-    export SSH_AUTH_SOCK
-else
-    gpg-agent --daemon
+if [ ! -e "$SSH_AUTH_SOCK" ]; then
+    gpg-agent --daemon > /dev/null 2>&1
 fi
+source "/tmp/gpg-agent-info-LOG1"
+export GPG_AGENT_INFO
+export SSH_AUTH_SOCK
 
 # Affichage de bienvenue
 cat /home/LOG1/.archey
