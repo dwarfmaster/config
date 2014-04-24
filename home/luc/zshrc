@@ -78,6 +78,7 @@ export DWMFIFOPATH=/home/LOG1/Log/programmation/c-cpp/x11/dwmfifo/dwm/
 export MANPAGER="/usr/bin/most -s" # manpage en couleur
 export MAILDIR="/home/LOG1/mail"
 export XDG_DOWNLOAD_DIR="/home/LOG1/Download/"
+export GPG_TTY=`tty`
 
 # Affichage de bienvenue
 cat /home/LOG1/.archey
