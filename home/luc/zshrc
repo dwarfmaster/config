@@ -80,6 +80,15 @@ export MAILDIR="/home/LOG1/mail"
 export XDG_DOWNLOAD_DIR="/home/LOG1/Download/"
 export GPG_TTY=`tty`
 
+# Launching gpg-agent
+if [ -f "$HOME/.gpg-agent-info" ]; then
+    source "$HOME/.gpg-agent-info"
+    export GPG_AGENT_INFO
+    export SSH_AUTH_SOCK
+else
+    gpg-agent --daemon
+fi
+
 # Affichage de bienvenue
 cat /home/LOG1/.archey
 archey3 > .archey 2> /dev/null &
