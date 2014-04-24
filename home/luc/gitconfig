@@ -11,8 +11,9 @@
 	co = checkout
 	st = status
 	br = branch
-	ci = commit
-	lg = shortlog
+	ci = commit -S
+    lg = shortlog
+    ls = ls-files
 
 [credential]
 	helper = cache
