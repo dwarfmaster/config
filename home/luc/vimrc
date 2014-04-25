@@ -1,7 +1,7 @@
-" S'adapte a l'OS
+" OS configuration
 runtime! archlinux.vim
 
-" Coloration syntaxique
+" Color
 if has("syntax")
 	syntax on
 endif
@@ -10,17 +10,18 @@ if has("autocmd")
 	filetype plugin indent on
 endif
 
-" Differents parametres
-set background=dark
-set mouse=a
-set autoindent
-set number
-set tabstop=4 shiftwidth=4 expandtab " Length of a tabulation
-set hlsearch " Highlight search results
-set incsearch
-set ignorecase " Ignore case ...
-set smartcase " ... unless there is at least one maj
-set listchars+=nbsp:. " Show unbreacable spaces in list mode
+" Global configuration
+set background=dark                  " Adapt colors to a dark background
+set mouse=a                          " Enable use of mouse
+set autoindent                       " Keep indent on new lines
+set number                           " Print line numbers
+set tabstop=4 shiftwidth=4 expandtab " Use 4 spaces instead of tabs
+set hlsearch                         " Highlight search results
+set incsearch                        " start searching while typing
+set ignorecase                       " Ignore case ...
+set smartcase                        " ... unless there is at least one maj
+set listchars+=nbsp:.                " Show unbreacable spaces in list mode
+set modeline                         " Read preferences integrated in files
 
 " Doxygen coloration for files
 au BufNewFile,BufRead *.doxygen setfiletype doxygen
@@ -29,32 +30,25 @@ au BufNewFile,BufRead *.dox setfiletype doxygen
 " Tex coloration for class syntax
 au BufNewFile,BufRead *.cls set ft=tex
 
-" txt2tags coloration
+" Txt2tags coloration
 au BufNewFile,BufRead *.t2t set ft=txt2tags
 
-" pde coloration
+" PDE (arduino IDE files) coloration
 au BufNewFile,BufRead *.pde set ft=cpp
 au BufNewFile,BufRead *.ino set ft=cpp
 
 " GLSL coloration
 au BufNewFile,BufRead *.frag,*.vert,*.glsl set ft=glsl
 
-" Whitespace coloration
-au BufNewFile,BufRead *.ws set ft=ws
-
 " FakeFS coloration
 au BufNewFile,BufRead *.fakefs set ft=fakefs
 
-" Assembly file must be in ascii
-" au BufNewFile,BufRead *.s set encoding=latin1
-" au BufNewFile,BufRead *.s set fileencoding=latin1
-
-" Correction orthographique
+" Syntax check ...
 setlocal spell spelllang=fr,en
-" Désactivée par defaut
+" ... disabled by default
 set nospell
 
-" Remplacement automatique LaTex
+" LaTeX shortcuts
 au BufNewFile,BufRead *.tex iab bi \begin{itemize}
 au BufNewFile,BufRead *.tex iab ei \end{itemize}
 au BufNewFile,BufRead *.tex iab st \section
@@ -78,23 +72,12 @@ highlight PmenuSel   ctermfg=0 ctermbg=7
 highlight PmenuSbar  ctermfg=7 ctermbg=0
 highlight PmenuThumb ctermfg=0 ctermbg=7
 
-" Intégration préférences
-set modeline
 
-" Exit when only taglist windows is open
-let Tlist_Exit_OnlyWindow=1
-
-" txt2tags with taglist
-let tlist_txt2tags_settings='txt2tags;d:Titles'
+" TagList configuration
+let Tlist_Exit_OnlyWindow=1                     " Exit when the TagList window is the last one.
+let tlist_txt2tags_settings='txt2tags;d:Titles' " Using txt2tags with taglist
 
 " Using system clipboard
 vmap <C-y> :!xclip -f <CR>
 map <C-p> :r !xclip -o<CR>
-
-" Erreurs en c++ indiquées dans le code
-" call pathogen#infect()
-
-" Vim addons manager
-" set runtimepath+=~/.vim/vam/
-" call vam#ActivateAddons(['lh-vim-lib', 'lh-brackets', 'lh-tags', 'lh-dev', 'lh-refactor'] ,{'auto_install' : 0})
 
