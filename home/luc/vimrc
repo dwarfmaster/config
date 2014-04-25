@@ -1,0 +1,100 @@
+" S'adapte a l'OS
+runtime! archlinux.vim
+
+" Coloration syntaxique
+if has("syntax")
+	syntax on
+endif
+
+if has("autocmd")
+	filetype plugin indent on
+endif
+
+" Differents parametres
+set background=dark
+set mouse=a
+set autoindent
+set number
+set tabstop=4 shiftwidth=4 expandtab " Length of a tabulation
+set hlsearch " Highlight search results
+set incsearch
+set ignorecase " Ignore case ...
+set smartcase " ... unless there is at least one maj
+set listchars+=nbsp:. " Show unbreacable spaces in list mode
+
+" Doxygen coloration for files
+au BufNewFile,BufRead *.doxygen setfiletype doxygen
+au BufNewFile,BufRead *.dox setfiletype doxygen
+
+" Tex coloration for class syntax
+au BufNewFile,BufRead *.cls set ft=tex
+
+" txt2tags coloration
+au BufNewFile,BufRead *.t2t set ft=txt2tags
+
+" pde coloration
+au BufNewFile,BufRead *.pde set ft=cpp
+au BufNewFile,BufRead *.ino set ft=cpp
+
+" GLSL coloration
+au BufNewFile,BufRead *.frag,*.vert,*.glsl set ft=glsl
+
+" Whitespace coloration
+au BufNewFile,BufRead *.ws set ft=ws
+
+" FakeFS coloration
+au BufNewFile,BufRead *.fakefs set ft=fakefs
+
+" Assembly file must be in ascii
+" au BufNewFile,BufRead *.s set encoding=latin1
+" au BufNewFile,BufRead *.s set fileencoding=latin1
+
+" Correction orthographique
+setlocal spell spelllang=fr,en
+" Désactivée par defaut
+set nospell
+
+" Remplacement automatique LaTex
+au BufNewFile,BufRead *.tex iab bi \begin{itemize}
+au BufNewFile,BufRead *.tex iab ei \end{itemize}
+au BufNewFile,BufRead *.tex iab st \section
+au BufNewFile,BufRead *.tex iab sst \subsection
+au BufNewFile,BufRead *.tex iab ssst \subsubsection
+
+" MSMTP config syntax coloration
+au BufNewFile,BufRead .msmtprc set ft=msmtp
+
+" Completion configuration.
+set completeopt=longest,menuone
+imap <tab> <C-X><C-U>
+
+" Address completion with mutt
+au BufRead /tmp/mutt* source ~/.mutt/address-search.vim
+
+" Autocomplete popup window colors
+highlight clear
+highlight Pmenu      ctermfg=7 ctermbg=4
+highlight PmenuSel   ctermfg=0 ctermbg=7
+highlight PmenuSbar  ctermfg=7 ctermbg=0
+highlight PmenuThumb ctermfg=0 ctermbg=7
+
+" Intégration préférences
+set modeline
+
+" Exit when only taglist windows is open
+let Tlist_Exit_OnlyWindow=1
+
+" txt2tags with taglist
+let tlist_txt2tags_settings='txt2tags;d:Titles'
+
+" Using system clipboard
+vmap <C-y> :!xclip -f <CR>
+map <C-p> :r !xclip -o<CR>
+
+" Erreurs en c++ indiquées dans le code
+" call pathogen#infect()
+
+" Vim addons manager
+" set runtimepath+=~/.vim/vam/
+" call vam#ActivateAddons(['lh-vim-lib', 'lh-brackets', 'lh-tags', 'lh-dev', 'lh-refactor'] ,{'auto_install' : 0})
+
