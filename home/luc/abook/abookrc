@@ -1,0 +1,37 @@
+# All at address http://manpages.ubuntu.com/manpages/dapper/man5/abookrc.5.html
+
+set autosave=true
+set show_all_emails=false
+
+set www_command=/home/LOG1/Prog/uzbl-launcher
+set use_ascii_only=false
+
+set add_email_prevent_duplicates=true
+set index_format="{nick:20|name} {email:40} {mobile:12} {phone:12|workphone}"
+
+# Colors
+set color_yellow=555555
+
+# Color theme
+set use_colors=true
+set color_header_fg=white
+set color_header_bg=blue
+set color_footer_fg=white
+set color_footer_bg=blue
+set color_list_header_fg=white
+set color_list_header_bg=blue
+set color_list_highlight_fg=white
+set color_list_highlight_bg=blue
+set color_list_odd_fg=white
+set color_list_odd_bg=black
+set color_list_even_fg=white
+set color_list_even_bg=yellow
+set color_tab_border_fg=blue
+set color_tab_border_bg=black
+set color_tab_label_fg=cyan
+set color_tab_label_bg=black
+set color_field_name_fg=cyan
+set color_field_name_bg=black
+set color_field_value_fg=green
+set color_field_value_bg=black
+
