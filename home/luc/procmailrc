@@ -31,6 +31,11 @@ LOGFILE=$MAILDIR/procmail.log
 * ^(From|To|Cc):.*git@vger.kernel.org
 | notmuch-deliver -v -t list -t git -r inbox default
 
+# Handle abook mailing list
+:0:notmuch.lock
+* ^(From|To|Cc):.*abook-devel@lists.sourceforge.net
+| notmuch-deliver -v -t list -t abook -r inbox default
+
 # Add mail with notmuch
 :0:notmuch.lock
 * .*
