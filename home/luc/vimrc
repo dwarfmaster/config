@@ -70,6 +70,9 @@ au BufNewFile,BufRead .msmtprc set ft=msmtp
 " Address completion with mutt (set omnifunc to be use by YCM)
 au BufRead /tmp/mutt* source ~/.mutt/address-search.vim
 
+" Filetype for reminders
+au BufNewFile,BufRead ~/.remind/* set ft=remind
+
 " Autocomplete popup window colors
 highlight clear
 highlight Pmenu      ctermfg=7 ctermbg=4

@@ -1,0 +1,22 @@
+# Wyrd Config file
+
+include "/etc/wyrdrc"
+
+set reminders_file = "/home/LOG1/.remind/reminders"
+set week_starts_monday = "true"
+# Use 24 hour format everywhere
+set schedule_12_hour = "false"
+set selection_12_hour = "false"
+set status_12_hour = "false"
+set description_12_hour = "false"
+# When scrolling, the cursor stays on center
+set center_cursor = "true"
+# Use european style DDMMYYYY on goto
+set goto_big_endian = "false"
+# A date like 6/1 will be interpreted 6th of january and not the reverse
+set quick_date_US = "false"
+# Number weeks
+set number_weeks = "true"
+# Debugs warnings enabled
+set advance_warning = "true"
+
