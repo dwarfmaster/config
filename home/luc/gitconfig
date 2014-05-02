@@ -12,6 +12,7 @@
 	st = status
 	br = branch
 	ci = commit -S
+    mg = merge -S
     lg = shortlog
     ls = ls-files
     pl = pull --ff-only
