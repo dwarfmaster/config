@@ -8,9 +8,11 @@ set use_ascii_only=false
 
 set add_email_prevent_duplicates=true
 set index_format="{nick:20|name} {email:40} {mobile:12} {phone:12|workphone}"
+set extend_index=true
 
 # Colors
-set color_yellow=555555
+set color_yellow=101010
+set color_white=ffffff
 
 # Color theme
 set use_colors=true
