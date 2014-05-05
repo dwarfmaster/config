@@ -28,6 +28,8 @@ compinit
 zstyle ':completion:*:rm:*' ignore-line yes
 zstyle ':completion:*:mv:*' ignore-line yes
 zstyle ':completion:*:cp:*' ignore-line yes
+# pass completion
+source ~/.zsh/pass.zsh-completion
 
 # Aliases
 alias ls='ls --color=auto'
