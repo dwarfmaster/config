@@ -93,3 +93,6 @@ set pgp_verify_sig=yes
 set pgp_timeout=60
 set pgp_autosign=yes
 
+# Opening urls
+macro pager cb |urlview 'Call urlview to extract urls from a message.'
+
