@@ -7,8 +7,7 @@ set www_command=/home/LOG1/Prog/uzbl-launcher
 set use_ascii_only=false
 
 set add_email_prevent_duplicates=true
-set index_format="{nick:20|name} {email:40} {mobile:12} {phone:12|workphone}"
-set extend_index=true
+set index_format="{nick:20+|name} {email:40+} {mobile:15} {phone:15|workphone}"
 
 # Colors
 set color_yellow=101010
