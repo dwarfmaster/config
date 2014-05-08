@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-my ($url) = @ARGV;
+my ($url) = join ' ',@ARGV;
 die "You must provide an url" if not defined $url;
 
 my $fifo = $ENV{UZBL_FIFO};

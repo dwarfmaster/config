@@ -310,7 +310,7 @@ set ebind     = @mode_bind global,-insert
 #@cbind  <Ctrl><Mod1>t  = sh 'urxvt -e socat unix-connect:"$UZBL_SOCKET" -'
 
 # Uri opening prompts
-@cbind  o<Open:>_       = spawn /home/LOG1/.config/uzbl/scripts/open.pl '%s'
+@cbind  o<Open:>_      = spawn /home/LOG1/.config/uzbl/scripts/open.pl "%s"
 # Or have it load the current uri into the keycmd for editing
 @cbind  O<uri:\@uri>_  = uri %s
 
@@ -352,7 +352,7 @@ set ebind     = @mode_bind global,-insert
 #@cbind  M  = spawn @scripts_dir/insert_bookmark.sh
 
 # Bookmark/history loading
-@cbind  U  = spawn @scripts_dir/load_url_from_history.sh
+@cbind  U  = spawn /home/LOG1/.config/uzbl/scripts/open_history.sh
 @cbind  u  = spawn @scripts_dir/load_url_from_bookmarks.sh
 
 # Temporary bookmarks
