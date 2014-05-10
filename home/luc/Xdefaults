@@ -23,7 +23,7 @@ urxvt*color0  : Black
 urxvt*color1  : Red3
 urxvt*color2  : Green3
 urxvt*color3  : Yellow3
-urxvt*color4  : Blue3
+urxvt*color4  : #5050ff
 urxvt*color5  : Magenta3
 urxvt*color6  : Cyan3
 urxvt*color7  : AntiqueWhite
@@ -31,7 +31,7 @@ urxvt*color8  : Grey25
 urxvt*color9  : Red
 urxvt*color10 : Green
 urxvt*color11 : Yellow
-urxvt*color12 : Blue
+urxvt*color12 : #7070ff
 urxvt*color13 : Magenta
 urxvt*color14 : Cyan
 urxvt*color15 : White
