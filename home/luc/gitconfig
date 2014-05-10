@@ -22,3 +22,15 @@
 	helper = cache
 [push]
 	default = matching
+
+[tig]
+    main-view = date:relative \
+        author:abbreviated \
+        id:yes,color \
+        commit-title:yes,graph=yes,refs=yes
+    blame-view = date:relative \
+        author:abbreviated \
+        file-name:auto \
+        id:yes,color \
+        line-number:yes,interval=1 text
+
