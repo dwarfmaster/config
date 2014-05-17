@@ -432,7 +432,7 @@ set insert   = @mode_config insert
 set stack    = @mode_config stack
 
 # Command mode config.
-@command  keycmd_style        = foreground="red"
+@command  keycmd_style        = foreground="white"
 @command  status_background   = #202020
 @command  mode_indicator      = Cmd
 @command  keycmd_events       = 1
@@ -447,10 +447,10 @@ set stack    = @mode_config stack
 @insert   modcmd_updates      = 0
 
 # Multi-stage-binding mode config.
-@stack    keycmd_style        = foreground="red"
+@stack    keycmd_style        = foreground="yellow"
 @stack    status_background   = #202020
 @stack    mode_indicator      = Bnd
-@stack    prompt_style        = foreground="#888" weight="light"
+@stack    prompt_style        = foreground="#aaa" weight="light"
 @stack    keycmd_events       = 1
 @stack    modcmd_updates      = 1
 @stack    forward_keys        = 0
