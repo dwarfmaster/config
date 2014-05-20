@@ -37,9 +37,14 @@ LOGFILE=$MAILDIR/procmail.log
 | notmuch-deliver -v -t list -t abook -r inbox default
 
 # Handle notmuch mailing list
-:O:notmuch.lock
+:0:notmuch.lock
 * ^(From|To|Cc):.*@notmuchmail.org
 | notmuch-deliver -v -t list -t notmuch -r inbox default
+
+# Handle remind mailing list
+:0:notmuch.lock
+* ^(From|To|Cc):.*remind.*@lists.roaringpenguin.com
+| notmuch-deliver -v -t list -t remind -r inbox default
 
 # Add mail with notmuch
 :0:notmuch.lock
