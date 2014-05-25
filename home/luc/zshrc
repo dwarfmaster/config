@@ -94,5 +94,5 @@ export SSH_AUTH_SOCK
 # Affichage de bienvenue
 cat /home/LOG1/.archey
 archey3 > .archey 2> /dev/null &
-remind -w`stty size | cut -d" " -f2` -mc+ .remind/reminders
+remind -w`stty size | cut -d" " -f2` -b1 -c+ .remind/reminders
 
