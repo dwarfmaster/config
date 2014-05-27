@@ -7,5 +7,5 @@ use_spacer none
 mpd_port 6666
 
 TEXT
-Net down ${downspeed enp3s0} up ${upspeed enp3s0} :: CPU ${loadavg 2 3} :: Temp ${acpitemp}c :: Batt ${battery_percent}% :: $memperc% ($mem) :: ${time %a %b %d %I:%M%P}
+CPU ${loadavg 2 3} :: Temp ${acpitemp}c :: Batt ${battery_percent}% :: $memperc% ($mem) :: ${time %a %b %d %I:%M%P}
 
