@@ -1,0 +1,11 @@
+gc.list  : debug,normal,urgent
+gc.width : 10
+gc.bg : #0f0
+gc.fg : #00f0f0
+gc.bc : #ff0000
+gc.debug.fg : #0
+gc.normal.bg : #0000ff
+gc.urgent.bg : #0
+global.width : 500
+normal.width : 250
+

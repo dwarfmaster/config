@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+ms=`echo "$1 / 1000" | bc`
+text="notif 5 normal $2 $3"
+echo $text >> /tmp/xcbnotif.fifo
+
