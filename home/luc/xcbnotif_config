@@ -1,11 +1,17 @@
-gc.list  : debug,normal,urgent
-gc.width : 10
-gc.bg : #0f0
-gc.fg : #00f0f0
-gc.bc : #ff0000
-gc.debug.fg : #0
-gc.normal.bg : #0000ff
-gc.urgent.bg : #0
-global.width : 500
+
+global.list          : debug,normal,urgent
+global.width         : 500
+global.gc.bg         : #0f0
+global.gc.fg         : #00f0f0
+global.gc.bc         : #ff0000
+global.gc.width      : 10
+global.padding.hori  : 20
+global.padding.vert  : 20
+global.padding.space : 10
+global.gravity       : top_right
+
+debug.gc.fg  : #0
+urgent.gc.bg : #0
 normal.width : 250
+normal.gc.bg : #0000ff
 
