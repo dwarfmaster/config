@@ -21,7 +21,8 @@ case $DEFAULT_SESSION in
 	dwm)		
 		conky | while read -r; do xsetroot -name "$REPLY"; done &
 		mpd /home/LOG1/.mpdconf &
-		twmnd &
+        xcbnotif > /dev/null 2>&1 &
+        cow-notify > /dev/null 2>&1 &
 		feh --bg-scale /home/LOG1/Images/bg.png &
 		exec dwm
 		;;
