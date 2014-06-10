@@ -265,7 +265,7 @@ song_list_format = "{%a - }{%t}|{$8%f$9}$R{$3(%l)$9}"
 ## Attention: It doesn't support song format anymore.
 ## Use `ncmpcpp --now-playing SONG_FORMAT` instead.
 ##
-execute_on_song_change = "twmnc -t \"Song change :\" -c \"$(ncmpcpp --now-playing)\""
+execute_on_song_change = "notify-send \"Song change :\" \"$(ncmpcpp --now-playing)\""
 #
 #playlist_show_remaining_time = "no"
 #
