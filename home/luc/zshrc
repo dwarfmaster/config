@@ -54,7 +54,6 @@ alias gitci='git commit -S'
 alias gitrlg-nc='git log --pretty=format:"%h (%cn)%d %s [%cr]" --graph'
 alias rsensors='while [ true ]; do clear && sensors && sleep 1; done'
 alias extend_screen='xrandr --output LVDS --mode 1600x900 --pos 0x0 --output HDMI-0 --mode 1920x1080 --pos 1600x0'
-alias scan='simple-scan'
 alias sudo='nocorrect sudo'
 alias .='pwd'
 alias keycode="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
