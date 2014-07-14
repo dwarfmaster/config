@@ -112,4 +112,20 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>'] " Use <S-Tab> to select bac
 let g:ycm_confirm_extra_conf = 0 " Don't ask when opening a .ycm_extra_conf.py file
 let g:ycm_cache_omnifunc = 0 " Don't cache omnifunc results, may slow down completion
 
+" Color 80th column on ,8
+set colorcolumn=0
+let s:color_column_old=80
+
+function! s:ToggleColorColumn()
+    if s:color_column_old == 0
+        let s:color_column_old = &colorcolumn
+        windo let &colorcolumn = 0
+    else
+        windo let &colorcolumn = s:color_column_old
+        let s:color_column_old = 0
+    endif
+endfunction
+
+nnoremap ,8 :cal <SID>ToggleColorColumn()<cr>
+
 
