@@ -1,5 +1,16 @@
-# export GTK2_RC_FILES= »$HOME/.gtkrc-2.0
+#!/bin/sh
 
+# Start system-wide configuration
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
+# exec gnome-session
+
+# Local wm independant config
 xrandr --output LVDS --auto --primary --output HDMI-0 --auto --right-of LVDS
 xmodmap -e "keycode 135 = Super_L" # reassigne 'clic droit' du clavier à la touche super
 xmodmap -e "keycode 65 = space space space space" # réassigne shift+espace à 4 espaces
@@ -7,6 +18,7 @@ xset b off
 synclient tapButton1=0
 numlockx # Enable numlock
 
+# Default session is dwm
 if [ $# -eq 0 ]
 then
 	DEFAULT_SESSION=dwm
@@ -14,6 +26,7 @@ else
 	DEFAULT_SESSION=$1
 fi
 
+# The session to launch
 case $DEFAULT_SESSION in
 	openbox)	exec openbox-session;;
 	awesome)	exec awesome;;
