@@ -35,7 +35,7 @@ set set_mode        = set mode =
 set set_status      = set status_message =
 
 # Spawn path shortcuts. In spawn the first dir+path match is used in "dir1:dir2:dir3:executable"
-set scripts_dir      = /home/LOG1/.config/uzbl/scripts:@prefix/share/uzbl/examples/data:scripts
+set scripts_dir      = /home/LOG1/.config/uzbl:@prefix/share/uzbl/examples/data:scripts
 
 # === Hardcoded handlers =====================================================
 
@@ -310,7 +310,7 @@ set ebind     = @mode_bind global,-insert
 #@cbind  <Ctrl><Mod1>t  = sh 'urxvt -e socat unix-connect:"$UZBL_SOCKET" -'
 
 # Uri opening prompts
-@cbind  o<Open:>_      = spawn /home/LOG1/.config/uzbl/scripts/open.pl "%s"
+@cbind  o<Open:>_      = spawn @scripts_dir/open.pl "%s"
 # Or have it load the current uri into the keycmd for editing
 @cbind  O<uri:\@uri>_  = uri %s
 
@@ -347,12 +347,12 @@ set ebind     = @mode_bind global,-insert
 
 # Bookmark inserting binds
 #@cbind <Ctrl>m<tags:>_  = sh 'echo "$UZBL_URI $1" >> "$XDG_DATA_HOME"/uzbl/bookmarks' '%s'
-@cbind M<name:>_  = spawn /home/LOG1/.config/uzbl/scripts/bookmarks.sh '%s'
+@cbind M<name:>_  = spawn @scripts_dir/bookmarks.sh '%s'
 # Or use a script to insert a bookmark.
 #@cbind  M  = spawn @scripts_dir/insert_bookmark.sh
 
 # Bookmark/history loading
-@cbind  U  = spawn /home/LOG1/.config/uzbl/scripts/open_history.sh
+@cbind  U  = spawn @scripts_dir/open_history.sh
 @cbind  u  = spawn @scripts_dir/load_url_from_bookmarks.sh
 
 # Temporary bookmarks
