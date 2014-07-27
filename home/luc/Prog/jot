@@ -20,8 +20,8 @@ from lxml import html
 import xapian
 import yaml
 
-DATABASE_DIR = os.path.expanduser('~/.jotmuch')
-ARCHIVE_DIR = os.path.expanduser('~/.jotmuch/archives')
+DATABASE_DIR = os.path.expanduser('~/.config/jotmuch')
+ARCHIVE_DIR = os.path.expanduser('~/.config/jotmuch/archives')
 URLSNAP = ['urlsnap', '--js']  # get rid of --js to disable JavaScript
 PNGVIEW = 'feh'
 
