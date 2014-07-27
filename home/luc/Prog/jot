@@ -20,10 +20,10 @@ from lxml import html
 import xapian
 import yaml
 
-DATABASE_DIR = os.path.expanduser('~/.config/jotmuch')
-ARCHIVE_DIR = os.path.expanduser('~/.config/jotmuch/archives')
+DATABASE_DIR = os.path.expanduser('~/.jotmuch')
+ARCHIVE_DIR = os.path.expanduser('~/.jotmuch/archives')
 URLSNAP = ['urlsnap', '--js']  # get rid of --js to disable JavaScript
-PNGVIEW = 'sxiv'
+PNGVIEW = 'feh'
 
 HMAC_KEY = 'Jotmuch'
 EDITOR = os.environ.get('EDITOR', 'vim')
@@ -169,15 +169,19 @@ def urlid(url):
 
 ### Bookmarking --------------------------------------------------------
 
-def bookmark_url(url, tags=[], archive=False, fetch_title=False):
+def bookmark_url(url, tags=[], notes = '', archive=False, fetch_title=False, use_editor=True):
+    if not notes:
+        notes = ''
+
     db = xapian.WritableDatabase(DATABASE_DIR, xapian.DB_CREATE_OR_OPEN)
     docid = get_docid(db, url)
     if docid:
         doc = db.get_document(docid)
         d = doc2dict(doc)
         d['tags'].extend(tags)
+        d['notes'] = notes
     else:
-        d = {'url': url, 'tags': tags}
+        d = {'url': url, 'tags': tags, 'notes': notes}
 
     if archive:
         archive_url(url)
@@ -189,7 +193,10 @@ def bookmark_url(url, tags=[], archive=False, fetch_title=False):
 
     # create a doc to fill in any missing fields
     doc = dict2doc(d)
-    newdocs = yaml2docs(editor(docs2yaml([doc])))
+    if use_editor:
+        newdocs = yaml2docs(editor(docs2yaml([doc])))
+    else:
+        newdocs = [doc]
 
     # insert_docs recomputes the docid, in case the user changes the url
     # in the editor. This ensures every URL has at most one docid.
@@ -391,11 +398,15 @@ def cli():
     help='Archive the webpage located at URL.')
 @click.option('-t', '--fetch-title', is_flag=True,
     help='Download the title of the webpage located at URL.')
+@click.option('-s', '--skip-editor', is_flag=True,
+    help='Don\'t launch the editor to tune the bookmark before saving.')
+@click.option('-n', '--notes', is_flag=False,
+    help='Set the notes from the command line.')
 @click.argument('url')
 @click.argument('tags', nargs=-1, required=False)
-def bookmark(url, tags, archive, fetch_title):
+def bookmark(url, tags, notes, archive, fetch_title, skip_editor):
     """Bookmark the given URL."""
-    docs = bookmark_url(url, list(tags), archive, fetch_title)
+    docs = bookmark_url(url, list(tags), notes, archive, fetch_title, not skip_editor)
     print_docs(docs)
 
 
