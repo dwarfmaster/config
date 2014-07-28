@@ -8,14 +8,13 @@ DMENU_OPTIONS="xmms vertical resize"
 . "$UZBL_UTIL_DIR/dmenu.sh"
 . "$UZBL_UTIL_DIR/uzbl-dir.sh"
 
-echo $DMENU >> /tmp/LOG1
-
+query="$*"
 if [ -z "$DMENU_HAS_VERTICAL" ]; then
     # because they are all after each other, just show the url, not their tags.
-    goto=$( /home/LOG1/Prog/jot search --format='{{url}}' | $DMENU )
+    goto=$( /home/LOG1/Prog/jot search --format='{{url}}' $query | $DMENU )
 else
     # show tags as well
-    goto=$( /home/LOG1/Prog/jot search --format='{{notes}} -- {{url}}' | $DMENU | sed 's/.*-- //g')
+    goto=$( /home/LOG1/Prog/jot search --format='{{notes}} -- {{url}}' $query | $DMENU | sed 's/.*-- //g')
 fi
 
 [ -n "$goto" ] && echo "uri $goto" > "$UZBL_FIFO"
