@@ -82,6 +82,9 @@ export MAILDIR="/home/LOG1/mail"
 export XDG_DOWNLOAD_DIR="/home/LOG1/Download/"
 export GPG_TTY=`tty`
 
+# Launching newsbeuter-listener
+pgrep -f newsbeuter-listener.pl > /dev/null || /home/LOG1/Prog/newsbeuter-listener.pl > /dev/null 2>&1 &
+
 # Launching gpg and ssh agents
 pgrep gpg-agent > /dev/null || gpg-agent --daemon > /dev/null 2>&1
 pgrep ssh-agent > /dev/null || ssh-agent > /tmp/ssh-agent-info-LOG1
