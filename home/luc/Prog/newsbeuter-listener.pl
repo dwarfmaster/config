@@ -6,6 +6,8 @@ use warnings;
 my $path = "/tmp/newsbeuter.fifo";
 my $browser = "uzbl-browser";
 
+exit if fork() != 0;
+
 system("mkfifo", $path);
 my $fifo;
 open($fifo, "+< $path") or die "Couldn't create and open $path name pipe.";
