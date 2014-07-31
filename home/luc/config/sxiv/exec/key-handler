@@ -1,0 +1,15 @@
+#!/bin/sh
+
+case "$1" in
+    "C-s")
+        nb=0
+        path="$HOME/Images/star/pict$nb"
+        while test -e $path
+        do
+            nb=$(($nb + 1))
+            path="$HOME/Images/star/pict$nb"
+        done
+        ln -s "$2" $path
+        ;;
+esac
+
