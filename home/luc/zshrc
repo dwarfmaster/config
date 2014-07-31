@@ -79,8 +79,13 @@ export DWMABRPATH=/home/LOG1/Log/programmation/c-cpp/x11/dwmabr/bin/Debug/
 export DWMFIFOPATH=/home/LOG1/Log/programmation/c-cpp/x11/dwmfifo/dwm/
 export MANPAGER="/usr/bin/most -s" # manpage en couleur
 export MAILDIR="/home/LOG1/mail"
-export XDG_DOWNLOAD_DIR="/home/LOG1/Download/"
 export GPG_TTY=`tty`
+
+# XDG vars
+export XDG_CONFIG_HOME="/home/LOG1/.config"
+export XDG_DATA_HOME="/home/LOG1/.local/share"
+export XDG_CACHE_HOME="/home/LOG1/.cache"
+export XDG_DOWNLOAD_DIR="/home/LOG1/Download/"
 
 # Launching newsbeuter-listener
 pgrep -f newsbeuter-listener.pl > /dev/null || /home/LOG1/Prog/newsbeuter-listener.pl > /dev/null 2>&1 &
