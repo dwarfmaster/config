@@ -52,6 +52,9 @@ au BufNewFile,BufRead *.frag,*.vert,*.glsl set ft=glsl
 " FakeFS coloration
 au BufNewFile,BufRead *.fakefs set ft=fakefs
 
+" Mail detection
+au BufNewFile,BufRead /home/*/mail/* set ft=mail
+
 " Syntax check ...
 setlocal spell spelllang=fr,en
 " ... disabled by default
