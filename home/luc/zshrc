@@ -24,10 +24,8 @@ source $ZSH/oh-my-zsh.sh
 # Completion
 autoload -Uz compinit
 compinit
-# Ne propose pas deux fois le même élément sur la ligne pour cp, mv et rm
+# Don't autocomplete twice for rm
 zstyle ':completion:*:rm:*' ignore-line yes
-zstyle ':completion:*:mv:*' ignore-line yes
-zstyle ':completion:*:cp:*' ignore-line yes
 # pass completion
 source ~/.zsh/pass.zsh-completion
 
@@ -35,24 +33,14 @@ source ~/.zsh/pass.zsh-completion
 alias ls='ls --color=auto'
 alias ll='ls -lrthF'
 alias lla='ll -A'
-alias llp='ll *.*pp'
-alias llpp='llp'
-alias llcp='ll *.cpp'
-alias llh='ll *.hpp'
-alias llhp='ls *.hpp'
-alias llc='ll *.c *.h'
+alias llp='ll *.{c,h}pp'
+alias llc='ll *.{c,h}'
 alias lldev='ll /dev/sd*'
 alias lld='lldev'
-alias upbox='openbox --reconfigure'
-alias terminal='gnome-terminal'
 alias rm='rm --preserve-root -i'
 alias nmap='nmap -T4 -A -v'
-alias nautilus='nautilus --no-desktop'
-alias minecraft='java -jar $HOME/Documents/games/minecraft/minecraft.jar'
 alias gitrlg='git log --pretty=format:"%Cred%h%Creset (%Cgreen%cn [%G?]%Creset)%Cgreen%d%Creset %s [%Cgreen%cr%Creset]" --graph'
-alias gitci='git commit -S'
 alias gitrlg-nc='git log --pretty=format:"%h (%cn)%d %s [%cr]" --graph'
-alias rsensors='while [ true ]; do clear && sensors && sleep 1; done'
 alias extend_screen='xrandr --output LVDS --mode 1600x900 --pos 0x0 --output HDMI-0 --mode 1920x1080 --pos 1600x0'
 alias sudo='nocorrect sudo'
 alias .='pwd'
@@ -64,20 +52,19 @@ alias archey='cat ~/.archey'
 alias mutt="/home/LOG1/Prog/mutt-launcher"
 alias newsbeuter="ssh -t 192.168.1.98 newsbeuter"
 
-# Les variables globales
+# Systems vars
 export EDITOR=vim
 export PATH=$PATH:$HOME/Prog
 export PATH=$PATH:/opt/android-sdk/platform-tools/
 export PATH=$PATH:$HOME/Prog/android-dev/
 export PATH=$PATH:/usr/share/java/apache-ant/bin/
-export PATH=$PATH:/opt/weidu/
 export PATH=$PATH:$HOME/Prog/vimpager
-export TERMINAL="gnome-terminal"
+export TERMINAL="rxvt-unicode-256color"
 export LD_LIBRARY_PATH=$HOME/libs/:$LD_LIBRARY_PATH
 export WINEARCH=win32
 export DWMABRPATH=/home/LOG1/Log/programmation/c-cpp/x11/dwmabr/bin/Debug/
 export DWMFIFOPATH=/home/LOG1/Log/programmation/c-cpp/x11/dwmfifo/dwm/
-export MANPAGER="/usr/bin/most -s" # manpage en couleur
+export MANPAGER="/usr/bin/most -s" # cloured manpage
 export MAILDIR="/home/LOG1/mail"
 export GPG_TTY=`tty`
 
@@ -99,7 +86,7 @@ export GPG_AGENT_INFO
 source /tmp/ssh-agent-info-LOG1
 export SSH_AUTH_SOCK
 
-# Affichage de bienvenue
+# Welcoming
 cat /home/LOG1/.archey
 archey3 > .archey 2> /dev/null &
 remind -w`stty size | cut -d" " -f2` -b1 -cau+ .remind/reminders
