@@ -14,6 +14,7 @@ fi
 xrandr --output LVDS --auto --primary --output HDMI-0 --auto --right-of LVDS
 xmodmap -e "keycode 135 = Super_L" # reassigne 'clic droit' du clavier à la touche super
 xmodmap -e "keycode 65 = space space space space" # réassigne shift+espace à 4 espaces
+mpd /home/LOG1/.mpdconf &
 xset b off
 synclient tapButton1=0
 numlockx # Enable numlock
@@ -33,7 +34,6 @@ case $DEFAULT_SESSION in
 	wmii)		exec wmii;;
 	dwm)		
 		conky | while read -r; do xsetroot -name "$REPLY"; done &
-		mpd /home/LOG1/.mpdconf &
         xcbnotif > /dev/null 2>&1 &
         /home/LOG1/Prog/cow-notify > /dev/null 2>&1 &
 		feh --bg-scale /home/LOG1/Images/bg.png &
