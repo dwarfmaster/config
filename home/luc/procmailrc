@@ -10,20 +10,20 @@ LOGFILE=$MAILDIR/procmail.log
 # Rules
 # Handle pwmt mailing list
 :0:notmuch.lock
-* ^(From|To):.*@lists.pwmt.org
+* ^(From|To|Cc):.*@lists.pwmt.org
 | notmuch-deliver -v -t list -t pwmt -r inbox default
 
 # Handle archlinux.org mailing lists
 :0:notmuch.lock
-* ^(From|To):.*arch-announce@archlinux.org
+* ^(From|To|Cc):.*arch-announce@archlinux.org
 | notmuch-deliver -v -t list -t archlinux -t arch-announce default
 
 :0:notmuch.lock
-* ^(From|To):.*arch-events@archlinux.org
+* ^(From|To|Cc):.*arch-events@archlinux.org
 | notmuch-deliver -v -t list -t archlinux -t arch-events default
 
 :0:notmuch.lock
-* ^(From|To):.*arch-general@archlinux.org
+* ^(From|To|Cc):.*arch-general@archlinux.org
 | notmuch-deliver -v -t list -t archlinux -t arch-general -r inbox default
 
 # Handle git mailing list
