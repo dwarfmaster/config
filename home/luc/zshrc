@@ -73,6 +73,7 @@ export DWMFIFOPATH=/home/LOG1/Log/programmation/c-cpp/x11/dwmfifo/dwm/
 export MANPAGER="/usr/bin/most -s" # cloured manpage
 export MAILDIR="/home/LOG1/mail"
 export GPG_TTY=`tty`
+export GOPATH="/home/LOG1/Log/programmation/go/"
 
 # XDG vars
 export XDG_CONFIG_HOME="/home/LOG1/.config"
