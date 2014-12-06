@@ -9,5 +9,5 @@ else
     name=$(echo "$cmd" | cut -f1)
     tags=$(echo "$cmd" | cut -f2)
 fi
-jot bookmark --skip-editor --notes "$name" $UZBL_URI $tags
+jot bookmark --no-editor --notes "$name" $UZBL_URI $tags
 

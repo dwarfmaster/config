@@ -20,13 +20,12 @@ from lxml import html
 import xapian
 import yaml
 
-DATABASE_DIR = os.path.expanduser('~/.config/jotmuch')
-ARCHIVE_DIR = os.path.expanduser('~/.config/jotmuch/archives')
+DATABASE_DIR = os.path.expanduser('~/.jotmuch')
+ARCHIVE_DIR = os.path.expanduser('~/.jotmuch/archives')
 URLSNAP = ['urlsnap', '--js']  # get rid of --js to disable JavaScript
 PNGVIEW = 'feh'
 
 HMAC_KEY = 'Jotmuch'
-EDITOR = os.environ.get('EDITOR', 'vim')
 
 # http://xapian.org/docs/omega/termprefixes.html
 boolean_prefix = {
@@ -169,32 +168,37 @@ def urlid(url):
 
 ### Bookmarking --------------------------------------------------------
 
-def bookmark_url(url, tags=[], notes = '', archive=False, fetch_title=False, use_editor=True):
-    if not notes:
-        notes = ''
-
+def bookmark_url(url, tags=[], title='', notes='', archive=False, fetch_title=False, use_editor=True):
     db = xapian.WritableDatabase(DATABASE_DIR, xapian.DB_CREATE_OR_OPEN)
     docid = get_docid(db, url)
     if docid:
         doc = db.get_document(docid)
         d = doc2dict(doc)
         d['tags'].extend(tags)
-        d['notes'] = notes
     else:
-        d = {'url': url, 'tags': tags, 'notes': notes}
+        d = {'url': url, 'tags': tags}
+
+    if title:
+        d['title'] = title
+    if notes:
+        d['notes'] = notes
 
     if archive:
         archive_url(url)
 
     if fetch_title and not archive and 'title' not in d:
         xmldoc = html.parse(url)
-        title = xmldoc.findtext('.//title')
-        d['title'] = title
+        pagetitle = xmldoc.findtext('.//title')
+        d['title'] = pagetitle
 
     # create a doc to fill in any missing fields
     doc = dict2doc(d)
+
     if use_editor:
-        newdocs = yaml2docs(editor(docs2yaml([doc])))
+        edited = editor(docs2yaml([doc]))
+        if edited == None:
+            return None
+        newdocs = yaml2docs(edited)
     else:
         newdocs = [doc]
 
@@ -379,6 +383,8 @@ def render_doc(doc, template):
     uid = urlid(d['url'])
     d['id'] = uid
     d['sid'] = uid[:8]
+    for ext in ['.png', '.mhtml']:
+        d[ext[1:] + 'path'] = os.path.join(ARCHIVE_DIR, uid + ext)
     return template.render(d)
 
 
@@ -398,16 +404,17 @@ def cli():
     help='Archive the webpage located at URL.')
 @click.option('-t', '--fetch-title', is_flag=True,
     help='Download the title of the webpage located at URL.')
-@click.option('-s', '--skip-editor', is_flag=True,
-    help='Don\'t launch the editor to tune the bookmark before saving.')
-@click.option('-n', '--notes', is_flag=False,
-    help='Set the notes from the command line.')
+@click.option('--editor/--no-editor', default=True,
+    help='Edit the bookmark with a text editor before saving.')
+@click.option('--title', default='', help='Set the title of a bookmark.')
+@click.option('--notes', default='', help='Set notes about a bookmark.')
 @click.argument('url')
 @click.argument('tags', nargs=-1, required=False)
-def bookmark(url, tags, notes, archive, fetch_title, skip_editor):
+def bookmark(url, tags, title, notes, archive, fetch_title, editor):
     """Bookmark the given URL."""
-    docs = bookmark_url(url, list(tags), notes, archive, fetch_title, not skip_editor)
-    print_docs(docs)
+    docs = bookmark_url(url, list(tags), title, notes, archive, fetch_title, editor)
+    if docs != None:
+        print_docs(docs)
 
 
 @cli.command(short_help='edit existing bookmarks')
@@ -415,9 +422,11 @@ def bookmark(url, tags, notes, archive, fetch_title, skip_editor):
 def edit(terms):
     mset = search_terms(terms)
     docs = [m.document for m in mset]
-    newdocs = yaml2docs(editor(docs2yaml(docs)))
-    insert_docs(newdocs)
-    print_docs(newdocs)
+    newdocs = editor(docs2yaml(docs))
+    if newdocs != None:
+        newdocs = yaml2docs(newdocs)
+        insert_docs(newdocs)
+        print_docs(newdocs)
 
 
 @cli.command(short_help='delete bookmarks')
@@ -455,10 +464,12 @@ def archive(terms):
             docs.append(m.document)
     if docs:
         docs = [dict2doc(doc2dict(doc)) for doc in docs]
-        newdocs = yaml2docs(editor(docs2yaml(docs)))
-        insert_docs(newdocs)
-        print('')
-        print_docs(newdocs)
+        newdocs = editor(docs2yaml(docs))
+        if newdocs != None:
+            newdocs = yaml2docs(newdocs)
+            insert_docs(newdocs)
+            print('')
+            print_docs(newdocs)
 
 
 @cli.command(short_help='view webpage snapshots')
@@ -488,6 +499,14 @@ def search(terms, format):
     mset = search_terms(terms)
     docs = [m.document for m in mset]
     print_docs(docs, format)
+
+
+@cli.command(short_help='count bookmarks')
+@click.argument('terms', nargs=-1, default='*', required=False)
+def count(terms):
+    """Count bookmarks matching the given search terms."""
+    mset = search_terms(terms)
+    print(len(mset))
 
 
 @cli.command('random', short_help='pick a random bookmark')
@@ -531,14 +550,7 @@ def jotimport(jsonfile):
 
 
 def editor(s, suffix='.yaml'):
-    with tempfile.NamedTemporaryFile(suffix=suffix) as tmp:
-        tmp.write(s)
-        tmp.flush()
-        subprocess.check_call([EDITOR, tmp.name])
-        tmp.seek(0)
-        r = tmp.read()
-    return r
-
+    return click.edit(s, extension=suffix, require_save=True)
 
 class OrderedDumper(yaml.SafeDumper):
     pass
