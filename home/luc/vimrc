@@ -38,6 +38,8 @@ au BufNewFile,BufRead *.dox setfiletype doxygen
 
 " Tex coloration for class syntax
 au BufNewFile,BufRead *.cls set ft=tex
+" Asymptote files
+au BufNewFile,BufRead *.asy set ft=asy
 
 " Txt2tags coloration
 au BufNewFile,BufRead *.t2t set ft=txt2tags
