@@ -1,3 +1,6 @@
+# Starting tmux
+/home/LOG1/Prog/tmux-nsession.sh default
+
 # History configuration
 HISTFILE=~/.histfile
 HISTSIZE=2000
