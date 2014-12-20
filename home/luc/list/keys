@@ -1,0 +1,24 @@
+# Keys configuration
+# Moving keys
+map i up
+map k down
+map j left
+map l right
+map [up] up
+map [down] down
+map [left] left
+map [right] right
+map t scroll toggle
+map h hide toggle 10 20
+
+map gg begin
+map G end
+map [home] begin
+map [end] end
+
+# Miscellaneous keys
+map p refresh
+map :<Command : > exe %s
+map m<Goto : > goto %s
+map q quit
+

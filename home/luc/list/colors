@@ -1,0 +1,6 @@
+# Configuring colors
+color top white blue
+color bot black green
+color lst cyan  black
+color sel red   yellow
+
