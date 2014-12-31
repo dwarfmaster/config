@@ -46,6 +46,11 @@ LOGFILE=$MAILDIR/procmail.log
 * ^(From|To|Cc):.*remind.*@lists.roaringpenguin.com
 | notmuch-deliver -v -t list -t remind -r inbox default
 
+# Handle mplayer mailing list
+:0:notmuch.lock
+* ^(From|To|Cc):.*mplayer*
+| notmuch-deliver -v -t list -t mplayer -r inbox default
+
 # Add mail with notmuch
 :0:notmuch.lock
 * .*
