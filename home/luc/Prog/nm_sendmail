@@ -1,3 +1,3 @@
 #!/bin/bash
-tee /home/LOG1/mail/sent >(notmuch insert +sent --folder=default) | msmtp $*
+tee /home/LOG1/mail/sent >(notmuch insert --folder=default +sent) | msmtp $*
 
