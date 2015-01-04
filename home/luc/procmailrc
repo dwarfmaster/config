@@ -11,48 +11,48 @@ LOGFILE=$MAILDIR/procmail.log
 # Handle pwmt mailing list
 :0:notmuch.lock
 * ^(From|To|Cc):.*@lists.pwmt.org
-| notmuch-deliver -v -t list -t pwmt -r inbox default
+| notmuch insert +list +pwmt -inbox --folder=default
 
 # Handle archlinux.org mailing lists
 :0:notmuch.lock
 * ^(From|To|Cc):.*arch-announce@archlinux.org
-| notmuch-deliver -v -t list -t archlinux -t arch-announce default
+| notmuch insert +list +archlinux +arch-announce --folder=default
 
 :0:notmuch.lock
 * ^(From|To|Cc):.*arch-events@archlinux.org
-| notmuch-deliver -v -t list -t archlinux -t arch-events default
+| notmuch insert +list +archlinux +arch-events --folder=default
 
 :0:notmuch.lock
 * ^(From|To|Cc):.*arch-general@archlinux.org
-| notmuch-deliver -v -t list -t archlinux -t arch-general -r inbox default
+| notmuch insert +list +archlinux +arch-general -inbox --folder=default
 
 # Handle git mailing list
 :0:notmuch.lock
 * ^(From|To|Cc):.*git@vger.kernel.org
-| notmuch-deliver -v -t list -t git -r inbox default
+| notmuch insert +list +git -inbox --folder=default
 
 # Handle abook mailing list
 :0:notmuch.lock
 * ^(From|To|Cc):.*abook-devel@lists.sourceforge.net
-| notmuch-deliver -v -t list -t abook -r inbox default
+| notmuch insert +list +abook -inbox --folder=default
 
 # Handle notmuch mailing list
 :0:notmuch.lock
 * ^(From|To|Cc):.*@notmuchmail.org
-| notmuch-deliver -v -t list -t notmuch -r inbox default
+| notmuch insert +list +notmuch -inbox --folder=default
 
 # Handle remind mailing list
 :0:notmuch.lock
 * ^(From|To|Cc):.*remind.*@lists.roaringpenguin.com
-| notmuch-deliver -v -t list -t remind -r inbox default
+| notmuch insert +list +remind -inbox --folder=default
 
 # Handle mplayer mailing list
 :0:notmuch.lock
 * ^(From|To|Cc):.*mplayer*
-| notmuch-deliver -v -t list -t mplayer -r inbox default
+| notmuch insert +list +mplayer -inbox --folder=default
 
 # Add mail with notmuch
 :0:notmuch.lock
 * .*
-| notmuch-deliver -v default
+| notmuch insert --folder=default
 
