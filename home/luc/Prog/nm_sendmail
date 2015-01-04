@@ -1,3 +1,3 @@
 #!/bin/bash
-tee ~/save_mail >(notmuch-deliver -v -t sent default) | msmtp $*
+tee /home/LOG1/mail/sent >(notmuch insert +sent --folder=default) | msmtp $*
 
