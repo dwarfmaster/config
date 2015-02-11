@@ -133,4 +133,17 @@ endfunction
 
 nnoremap ,8 :cal <SID>ToggleColorColumn()<cr>
 
+" Caml-light executor integration
+vmap <silent> <Enter> :'<,'>write >> /tmp/caml_light_fifo<cr>
+
+" Miscellaneous
+function! s:GetVisualSelection()
+    let [lnum1, col1] = getpos("'<")[1:2]
+    let [lnum2, col2] = getpos("'>")[1:2]
+    let lines = getline(lnum1, lnum2)
+    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][col1 - 1:]
+    return join(lines, '\n')
+endfunction
+
 
