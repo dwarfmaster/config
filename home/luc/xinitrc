@@ -19,6 +19,10 @@ xset b off
 synclient tapButton1=0
 numlockx # Enable numlock
 
+# Notifications
+xcbnotif > /dev/null 2>&1 &
+/home/LOG1/Prog/cow-notify > /dev/null 2>&1 &
+
 # Default session is dwm
 if [ $# -eq 0 ]
 then
@@ -31,11 +35,13 @@ fi
 case $DEFAULT_SESSION in
 	openbox)	exec openbox-session;;
 	awesome)	exec awesome;;
-	wmii)		exec wmii;;
+    wmii)
+        until wmii; do
+            true
+        done
+        ;;
 	dwm)		
 		conky | while read -r; do xsetroot -name "$REPLY"; done &
-        xcbnotif > /dev/null 2>&1 &
-        /home/LOG1/Prog/cow-notify > /dev/null 2>&1 &
 		feh --bg-scale /home/LOG1/Images/bg.png &
 		exec dwm
 		;;
