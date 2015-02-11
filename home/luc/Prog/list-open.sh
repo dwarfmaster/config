@@ -21,6 +21,13 @@ elif [[ -z $list || ! -x $list ]]; then
 elif [[ -z $modes || ! -d $modes ]]; then
     echo "$modes does not exits ..." 1>&2
     exit
+elif [[ $1 = "--list" ]]; then
+    echo "Listing modes ..."
+    for mode in `ls $modes`; do
+        echo $mode
+    done
+    echo "Done."
+    exit
 fi
 
 # Arguments
