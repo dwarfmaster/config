@@ -21,16 +21,38 @@ set mouse=a                          " Enable use of mouse
 set autoindent                       " Keep indent on new lines
 set number                           " Print line numbers
 set tabstop=4 shiftwidth=4 expandtab " Use 4 spaces instead of tabs
-set hlsearch                         " Highlight search results
-set incsearch                        " start searching while typing
-set ignorecase                       " Ignore case ...
-set smartcase                        " ... unless there is at least one maj
-set listchars+=nbsp:.                " Show unbreacable spaces in list mode
 set modeline                         " Read preferences integrated in files
 set nocompatible                     " Use vim improvement, even when they break compatibility with vi
 set completeopt=longest,menuone      " Complete configuration (TODO can be deleted with YCM ?)
 set exrc                             " Allow local .vimrc files for project wide configuration
 set secure                           " Restrict commands in project-wide .vimrc
+set encoding=utf-8                   " Default text encoding
+set cursorline                       " Highline current line
+set showmode                         " Show the current mode
+set ttyfast                          " Makes scrolling smoother
+set ruler                            " Show position of curser
+set backspace=indent,eol,start       " What can be removed by backspace
+set relativenumber                   " Show line numbers relativly to the current one
+set undofile                         " Tell vim to create an .un~ file saving undos accross openings
+set listchars+=nbsp:~                " Show unbreacable spaces in list mode
+
+" Searching options
+" Use perl-like regex on searching
+noremap  / /\v
+vnoremap / /\v
+set hlsearch                         " Highlight search results
+set incsearch                        " start searching while typing
+set ignorecase                       " Ignore case ...
+set smartcase                        " ... unless there is at least one maj
+set gdefault                         " :%s/// -> :%s///g
+" Clear search highlight
+nnoremap ,<space> :noh<cr>
+
+" Wraping long lines
+set wrap                             " Wrap too long lines
+set linebreak                        " Don't wrap line in the middle of a word
+" TODO moving across long lines
+" TODO configure formatting text
 
 " Doxygen coloration for files
 au BufNewFile,BufRead *.doxygen setfiletype doxygen
@@ -145,5 +167,4 @@ function! s:GetVisualSelection()
     let lines[0] = lines[0][col1 - 1:]
     return join(lines, '\n')
 endfunction
-
 
