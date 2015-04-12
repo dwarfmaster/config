@@ -5,15 +5,17 @@ runtime! archlinux.vim
 if has("syntax")
 	syntax on
 endif
-filetype off
 
 " Manage plugins with Vundle
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'      " Let vundle manage itself, required
 Plugin 'Valloric/YouCompleteMe' " Use YouCompleteMe plugin
+Plugin 'sjl/gundo.vim'          " Use gundo plugin
 call vundle#end()
 filetype plugin indent on
+
 " Global configuration
 set background=dark                  " Adapt colors to a dark background
 set mouse=a                          " Enable use of mouse
@@ -165,7 +167,10 @@ au Syntax * RainbowParenthesesLoadBraces
 au Syntax xml  RainbowParenthesesLoadChevrons
 au Syntax html RainbowParenthesesLoadChevrons
 
-nmap ,7 :RainbowParenthesesToggle<cr>
+noremap ,7 :RainbowParenthesesToggle<cr>
+
+" Gundo configuration
+noremap <F5> :GundoToggle<cr>
 
 " Color 80th column on ,8
 set colorcolumn=0
