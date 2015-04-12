@@ -14,7 +14,6 @@ Plugin 'gmarik/Vundle.vim'      " Let vundle manage itself, required
 Plugin 'Valloric/YouCompleteMe' " Use YouCompleteMe plugin
 call vundle#end()
 filetype plugin indent on
-
 " Global configuration
 set background=dark                  " Adapt colors to a dark background
 set mouse=a                          " Enable use of mouse
@@ -51,6 +50,7 @@ nnoremap ,<space> :noh<cr>
 " Wraping long lines
 set wrap                             " Wrap too long lines
 set linebreak                        " Don't wrap line in the middle of a word
+set showbreak=+++                    " Showing when breaking line
 " TODO moving across long lines
 " TODO configure formatting text
 
@@ -138,6 +138,34 @@ let g:ycm_key_list_select_completion = ['<TAB>'] " Use <Tab> to select a result 
 let g:ycm_key_list_previous_completion = ['<S-TAB>'] " Use <S-Tab> to select backward
 let g:ycm_confirm_extra_conf = 0 " Don't ask when opening a .ycm_extra_conf.py file
 let g:ycm_cache_omnifunc = 0 " Don't cache omnifunc results, may slow down completion
+
+" Rainbow parentheses configuration
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 14
+let g:rbpt_loadcmd_toggle = 0
+let g:bold_parentheses = 1
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+au Syntax xml  RainbowParenthesesLoadChevrons
+au Syntax html RainbowParenthesesLoadChevrons
+
+nmap ,7 :RainbowParenthesesToggle<cr>
 
 " Color 80th column on ,8
 set colorcolumn=0
