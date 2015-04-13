@@ -1,3 +1,5 @@
+" vim: set foldmethod=marker:
+
 " Load plugins with pathogen
 execute pathogen#infect()
 
@@ -58,34 +60,31 @@ au BufNewFile,BufRead *.doxygen setfiletype doxygen
 au BufNewFile,BufRead *.dox setfiletype doxygen
 
 " Tex coloration for class syntax
-au BufNewFile,BufRead *.cls set ft=tex
+au BufNewFile,BufRead *.cls setfiletype tex
 " Asymptote files
-au BufNewFile,BufRead *.asy set ft=asy
+au BufNewFile,BufRead *.asy setfiletype asy
 
 " Txt2tags coloration
-au BufNewFile,BufRead *.t2t set ft=txt2tags
+au BufNewFile,BufRead *.t2t setfiletype txt2tags
 
 " PDE (arduino IDE files) coloration
-au BufNewFile,BufRead *.pde set ft=cpp
-au BufNewFile,BufRead *.ino set ft=cpp
+au BufNewFile,BufRead *.pde setfiletype cpp
+au BufNewFile,BufRead *.ino setfiletype cpp
 
 " GLSL coloration
-au BufNewFile,BufRead *.frag,*.vert,*.glsl set ft=glsl
+au BufNewFile,BufRead *.frag,*.vert,*.glsl setfiletype glsl
 
 " FakeFS coloration
-au BufNewFile,BufRead *.fakefs set ft=fakefs
+au BufNewFile,BufRead *.fakefs setfiletype fakefs
 
 " Mail detection
-au BufNewFile,BufRead /home/*/mail/* set ft=mail
+au BufNewFile,BufRead /home/*/mail/* setfiletype mail
 
 " MSMTP config syntax coloration
-au BufNewFile,BufRead .msmtprc set ft=msmtp
-
-" Address completion with mutt (set omnifunc to be use by YCM)
-au BufRead /tmp/mutt* source ~/.mutt/address-search.vim
+au BufNewFile,BufRead .msmtprc setfiletype msmtp
 
 " Filetype for reminders
-au BufNewFile,BufRead ~/.remind/* set ft=remind
+au BufNewFile,BufRead ~/.remind/* setfiletype remind
 " }}}
 
 " {{{ Spell
@@ -120,11 +119,25 @@ let g:ycm_filetype_blacklist = {
             \ 'notes'     : 1,
             \ 'markdown'  : 1,
             \ 'unite'     : 1,
-            \ 'text'      : 1,
             \ 'vimwiki'   : 1,
+            \ 'text'      : 1,
             \ 'pandoc'    : 1,
             \ 'gitcommit' : 1
             \ }
+let g:ycm_semantic_triggers =  {
+    \ 'cs,java,javascript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+    \ 'c'          : ['->', '.'],
+    \ 'objc'       : ['->', '.'],
+    \ 'ocaml'      : ['.', '#'],
+    \ 'cpp,objcpp' : ['->', '.', '::'],
+    \ 'perl'       : ['->'],
+    \ 'php'        : ['->', '::'],
+    \ 'vim'        : ['re![_a-zA-Z]+[_\w]*\.'],
+    \ 'ruby'       : ['.', '::'],
+    \ 'lua'        : ['.', ':'],
+    \ 'erlang'     : [':'],
+    \ 'mail'       : ['re!^\w+:\s+'],
+    \ }
 let g:ycm_error_symbol   = 'X>'                        " Symbol to show on lines with errors
 let g:ycm_warning_symbol = '>>'                        " Symbol to show on lines with warnings
 let g:ycm_enable_diagnostic_highlighting = 0           " Do not highlight portion of texts with errors/warnings
@@ -135,7 +148,7 @@ let g:ycm_seed_identifiers_with_syntax = 1             " Make YCM add syntax key
 let g:ycm_key_list_select_completion = ['<TAB>']       " Use <Tab> to select a result in completion
 let g:ycm_key_list_previous_completion = ['<S-TAB>']   " Use <S-Tab> to select backward
 let g:ycm_confirm_extra_conf = 0                       " Don't ask when opening a .ycm_extra_conf.py file
-let g:ycm_cache_omnifunc = 0                           " Don't cache omnifunc results, may slow down completion
+let g:ycm_cache_omnifunc = 1                           " Cache omnifunc results
 " }}}
 
 " {{{ Rainbow parentheses configuration
