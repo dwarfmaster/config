@@ -1,22 +1,15 @@
-" OS configuration
-runtime! archlinux.vim
+" Load plugins with pathogen
+execute pathogen#infect()
 
-" Color
+" {{{ Color
+runtime! archlinux.vim
 if has("syntax")
 	syntax on
 endif
-
-" Manage plugins with Vundle
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'      " Let vundle manage itself, required
-Plugin 'Valloric/YouCompleteMe' " Use YouCompleteMe plugin
-Plugin 'sjl/gundo.vim'          " Use gundo plugin
-call vundle#end()
 filetype plugin indent on
+" }}}
 
-" Global configuration
+" {{{ Global configuration
 set background=dark                  " Adapt colors to a dark background
 set mouse=a                          " Enable use of mouse
 set autoindent                       " Keep indent on new lines
@@ -24,7 +17,6 @@ set number                           " Print line numbers
 set tabstop=4 shiftwidth=4 expandtab " Use 4 spaces instead of tabs
 set modeline                         " Read preferences integrated in files
 set nocompatible                     " Use vim improvement, even when they break compatibility with vi
-set completeopt=longest,menuone      " Complete configuration (TODO can be deleted with YCM ?)
 set exrc                             " Allow local .vimrc files for project wide configuration
 set secure                           " Restrict commands in project-wide .vimrc
 set encoding=utf-8                   " Default text encoding
@@ -36,8 +28,10 @@ set backspace=indent,eol,start       " What can be removed by backspace
 set relativenumber                   " Show line numbers relativly to the current one
 set undofile                         " Tell vim to create an .un~ file saving undos accross openings
 set listchars+=nbsp:~                " Show unbreacable spaces in list mode
+set completeopt=longest,menuone,preview
+" }}}
 
-" Searching options
+" {{{ Searching options
 " Use perl-like regex on searching
 noremap  / /\v
 vnoremap / /\v
@@ -48,14 +42,17 @@ set smartcase                        " ... unless there is at least one maj
 set gdefault                         " :%s/// -> :%s///g
 " Clear search highlight
 nnoremap ,<space> :noh<cr>
+" }}}
 
-" Wraping long lines
+" {{{ Wraping long lines
 set wrap                             " Wrap too long lines
 set linebreak                        " Don't wrap line in the middle of a word
 set showbreak=+++                    " Showing when breaking line
 " TODO moving across long lines
 " TODO configure formatting text
+" }}}
 
+" {{{ Special filetype
 " Doxygen coloration for files
 au BufNewFile,BufRead *.doxygen setfiletype doxygen
 au BufNewFile,BufRead *.dox setfiletype doxygen
@@ -81,18 +78,6 @@ au BufNewFile,BufRead *.fakefs set ft=fakefs
 " Mail detection
 au BufNewFile,BufRead /home/*/mail/* set ft=mail
 
-" Syntax check ...
-setlocal spell spelllang=fr,en
-" ... disabled by default
-set nospell
-
-" LaTeX shortcuts
-au BufNewFile,BufRead *.tex iab bi \begin{itemize}
-au BufNewFile,BufRead *.tex iab ei \end{itemize}
-au BufNewFile,BufRead *.tex iab st \section
-au BufNewFile,BufRead *.tex iab sst \subsection
-au BufNewFile,BufRead *.tex iab ssst \subsubsection
-
 " MSMTP config syntax coloration
 au BufNewFile,BufRead .msmtprc set ft=msmtp
 
@@ -101,23 +86,34 @@ au BufRead /tmp/mutt* source ~/.mutt/address-search.vim
 
 " Filetype for reminders
 au BufNewFile,BufRead ~/.remind/* set ft=remind
+" }}}
 
-" Autocomplete popup window colors
+" {{{ Spell
+" Syntax check ...
+setlocal spell spelllang=fr,en
+" ... disabled by default
+set nospell
+" }}}
+
+" {{{ Autocomplete popup window colors
 highlight clear
 highlight Pmenu      ctermfg=7 ctermbg=4
 highlight PmenuSel   ctermfg=0 ctermbg=7
 highlight PmenuSbar  ctermfg=7 ctermbg=0
 highlight PmenuThumb ctermfg=0 ctermbg=7
+" }}}
 
-" TagList configuration
+" {{{ TagList configuration
 let Tlist_Exit_OnlyWindow=1                     " Exit when the TagList window is the last one.
 let tlist_txt2tags_settings='txt2tags;d:Titles' " Using txt2tags with taglist
+" }}}
 
-" Using system clipboard
+" {{{ Using system clipboard
 vmap <C-y> :!xclip -f <CR>
 map <C-p> :r !xclip -o<CR>
+" }}}
 
-" YouCompleteMe configuration
+" {{{ YouCompleteMe configuration
 let g:ycm_filetype_blacklist = {
             \ 'tagbar'    : 1,
             \ 'qf'        : 1,
@@ -129,19 +125,20 @@ let g:ycm_filetype_blacklist = {
             \ 'pandoc'    : 1,
             \ 'gitcommit' : 1
             \ }
-let g:ycm_error_symbol   = 'X>' " Symbol to show on lines with errors
-let g:ycm_warning_symbol = '>>' " Symbol to show on lines with warnings
-let g:ycm_enable_diagnostic_highlighting = 0 " Do not highlight portion of texts with errors/warnings
-let g:ycm_echo_current_diagnostic = 1 " When moving to a line with error/warning, echo it
-let g:ycm_complete_in_comments = 1 " Make YCM complete even when typing in comments
-let g:ycm_complete_in_strings = 0 " Prevent YCM from completing when in strings
-let g:ycm_seed_identifiers_with_syntax = 1 " Make YCM add syntax keyword to completion
-let g:ycm_key_list_select_completion = ['<TAB>'] " Use <Tab> to select a result in completion
-let g:ycm_key_list_previous_completion = ['<S-TAB>'] " Use <S-Tab> to select backward
-let g:ycm_confirm_extra_conf = 0 " Don't ask when opening a .ycm_extra_conf.py file
-let g:ycm_cache_omnifunc = 0 " Don't cache omnifunc results, may slow down completion
+let g:ycm_error_symbol   = 'X>'                        " Symbol to show on lines with errors
+let g:ycm_warning_symbol = '>>'                        " Symbol to show on lines with warnings
+let g:ycm_enable_diagnostic_highlighting = 0           " Do not highlight portion of texts with errors/warnings
+let g:ycm_echo_current_diagnostic = 1                  " When moving to a line with error/warning, echo it
+let g:ycm_complete_in_comments = 1                     " Make YCM complete even when typing in comments
+let g:ycm_complete_in_strings = 0                      " Prevent YCM from completing when in strings
+let g:ycm_seed_identifiers_with_syntax = 1             " Make YCM add syntax keyword to completion
+let g:ycm_key_list_select_completion = ['<TAB>']       " Use <Tab> to select a result in completion
+let g:ycm_key_list_previous_completion = ['<S-TAB>']   " Use <S-Tab> to select backward
+let g:ycm_confirm_extra_conf = 0                       " Don't ask when opening a .ycm_extra_conf.py file
+let g:ycm_cache_omnifunc = 0                           " Don't cache omnifunc results, may slow down completion
+" }}}
 
-" Rainbow parentheses configuration
+" {{{ Rainbow parentheses configuration
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
     \ ['Darkblue',    'SeaGreen3'],
@@ -168,11 +165,13 @@ au Syntax xml  RainbowParenthesesLoadChevrons
 au Syntax html RainbowParenthesesLoadChevrons
 
 noremap ,7 :RainbowParenthesesToggle<cr>
+" }}}
 
-" Gundo configuration
+" {{{ Gundo configuration
 noremap <F5> :GundoToggle<cr>
+" }}}
 
-" Color 80th column on ,8
+" {{{ Color 80th column on ,8
 set colorcolumn=0
 let s:color_column_old=80
 
@@ -187,11 +186,13 @@ function! s:ToggleColorColumn()
 endfunction
 
 nnoremap ,8 :cal <SID>ToggleColorColumn()<cr>
+" }}}
 
-" Caml-light executor integration
+" {{{ Caml-light executor integration
 vmap <silent> <Enter> :'<,'>write >> /tmp/caml_light_fifo<cr>
+" }}}
 
-" Miscellaneous
+" {{{ Miscellaneous
 function! s:GetVisualSelection()
     let [lnum1, col1] = getpos("'<")[1:2]
     let [lnum2, col2] = getpos("'>")[1:2]
@@ -200,4 +201,5 @@ function! s:GetVisualSelection()
     let lines[0] = lines[0][col1 - 1:]
     return join(lines, '\n')
 endfunction
+" }}}
 
