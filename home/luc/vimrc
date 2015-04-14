@@ -29,7 +29,7 @@ set ruler                            " Show position of curser
 set backspace=indent,eol,start       " What can be removed by backspace
 set relativenumber                   " Show line numbers relativly to the current one
 set undofile                         " Tell vim to create an .un~ file saving undos accross openings
-set listchars+=nbsp:~                " Show unbreacable spaces in list mode
+set listchars+=nbsp:~,tab:>.         " Show unbreacable spaces in list mode
 set completeopt=longest,menuone,preview
 " }}}
 
@@ -145,10 +145,21 @@ let g:ycm_echo_current_diagnostic = 1                  " When moving to a line w
 let g:ycm_complete_in_comments = 1                     " Make YCM complete even when typing in comments
 let g:ycm_complete_in_strings = 0                      " Prevent YCM from completing when in strings
 let g:ycm_seed_identifiers_with_syntax = 1             " Make YCM add syntax keyword to completion
-let g:ycm_key_list_select_completion = ['<TAB>']       " Use <Tab> to select a result in completion
-let g:ycm_key_list_previous_completion = ['<S-TAB>']   " Use <S-Tab> to select backward
+let g:ycm_key_list_select_completion = ['<C-n>']       " Use <C-n> to select a result in completion
+let g:ycm_key_list_previous_completion = ['C-p>']      " Use <C-p> to select backward
+let g:SuperTabDefaultCompletionType = '<C-n>'          " Use supertab to map <tab> to <C-n>
 let g:ycm_confirm_extra_conf = 0                       " Don't ask when opening a .ycm_extra_conf.py file
 let g:ycm_cache_omnifunc = 1                           " Cache omnifunc results
+" }}}
+
+" {{{ UltiSnips configuration
+let g:UltiSnipsEditSplit = "vertical"                   " Open edit window by splitting
+let g:UltiSnipsSnippetsDir = "/home/LOG1/.vim/UltiSnips" " directory for edited snippets
+let g:UltiSnipsEnableSnipMate = "1"                     " Automaticly load snippets dirs in runtime
+let g:UltiSnipsExpandTrigger = "<TAB>"
+let g:UltiSnipsJumpForwardTrigger = "<TAB>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-TAB>"
+
 " }}}
 
 " {{{ Rainbow parentheses configuration
