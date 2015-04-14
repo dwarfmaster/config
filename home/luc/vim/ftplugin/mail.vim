@@ -1,6 +1,6 @@
 " Add an omnifunc for mails to autocomplete mail addresses
 
-fun! CompleteEmails(findstart, base)
+fun! ContactEmails(findstart, base)
     if a:findstart
         let line = getline('.')
         "locate the start of the word
@@ -21,14 +21,14 @@ fun! CompleteEmails(findstart, base)
     endif
 endfun
 
-fun! ContactComplete(findstart, base)
+fun! MailComplete(findstart, base)
     " Fetch current line
     let line = getline(line('.'))
     " Is it a special line?
     if line =~ '^\(To\|Cc\|Bcc\|From\|Reply-To\):'
-        return CompleteEmails(a:findstart, a:base)
+        return ContactEmails(a:findstart, a:base)
     endif
 endfun
 
-set omnifunc=ContactComplete
+set omnifunc=MailComplete
 
