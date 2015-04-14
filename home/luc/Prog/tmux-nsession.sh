@@ -23,7 +23,7 @@ else
         done
 
         echo "Launching copy of base session $base_session ..."
-        # Session is dare and time to prevent conflict
+        # Session is date and time to prevent conflict
         session_id=`date +%Y%m%d%H%M%S`
         session_id="$base_session-$session_id"
         # Create a new session and link to base session
