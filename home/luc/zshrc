@@ -59,7 +59,7 @@ alias sl='/usr/bin/sl'
 alias grep='grep -n'
 alias archey='cat ~/.archey'
 alias mutt="/home/LOG1/Prog/mutt-launcher"
-alias newsbeuter="ssh -t 192.168.1.98 newsbeuter"
+# alias newsbeuter="ssh -t 192.168.0.18 newsbeuter"
 
 # Systems vars
 export EDITOR=vim
@@ -93,8 +93,6 @@ pgrep -f newsbeuter-listener.pl > /dev/null || /home/LOG1/Prog/newsbeuter-listen
 pgrep gpg-agent > /dev/null || gpg-agent --daemon > /dev/null 2>&1
 pgrep ssh-agent > /dev/null || ssh-agent > /tmp/ssh-agent-info-LOG1
 
-source /tmp/gpg-agent-info-LOG1
-export GPG_AGENT_INFO
 source /tmp/ssh-agent-info-LOG1
 export SSH_AUTH_SOCK
 
