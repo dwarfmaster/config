@@ -14,7 +14,7 @@ fun! ContactEmails(findstart, base)
         " find the addresses ustig the external tool
         " the tools must give properly formated email addresses
         let res = []
-        for m in split(system('mutt-evo-query -r  ' . shellescape(a:base)), '\n')
+        for m in split(system('abook-query "%n <%e>" ' . shellescape(a:base)), '\n')
                 call add(res, m)
         endfor
         return res

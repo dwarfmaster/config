@@ -1,0 +1,71 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+if (scalar @ARGV < 2) {
+    print "Usage : abook-query format query\n";
+    exit 0;
+}
+
+
+my $abook  = "/home/LOG1/.abook/addressbook";
+my $format = $ARGV[0];
+my $query  = $ARGV[1];
+
+my %field;
+open FD, '<:encoding(UTF-8)', $abook or die "Couldn't open $abook file.";
+my $inline = !1;
+while (my $line = <FD>) {
+    chomp $line;
+    if ($line =~ m/^\[\d+\]\s*$/) {
+        if ($inline and 
+                ($field{'name'} =~ m/$query/i or $field{'email'} =~ m/$query/i)) {
+            fmt(\%field);
+        }
+        clean_fd(\%field);
+        $inline = !0;
+    }
+    elsif(not $inline) {
+        next;
+    }
+
+    if ($line =~ m/^(\w+)=(.*)$/) {
+        $field{$1} = $2;
+    }
+}
+
+sub fmt {
+    my ($ref) = @_;
+    my %field = %{$ref};
+    my @mails = split ',',$field{'email'};
+    foreach my $mail (@mails) {
+        my $output = $format;
+        $output =~ s/%n/$field{'name'}/g;
+        $output =~ s/%e/$mail/g;
+        $output =~ s/%a/$field{'address'}/g;
+        $output =~ s/%z/$field{'zip'}/g;
+        $output =~ s/%C/$field{'city'}/g;
+        $output =~ s/%c/$field{'country'}/g;
+        $output =~ s/%p/$field{'phone'}/g;
+        $output =~ s/%m/$field{'mobile'}/g;
+        print "$output\n";
+    }
+}
+
+sub clean_fd {
+    my ($ref) = @_;
+    my %field = %{$ref};
+    $field{'name'}    = '';
+    $field{'email'}   = '';
+    $field{'address'} = '';
+    $field{'zip'}     = '';
+    $field{'city'}    = '';
+    $field{'country'} = '';
+    $field{'phone'}   = '';
+    $field{'mobile'}  = '';
+}
+
+
+close FD;
+

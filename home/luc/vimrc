@@ -136,7 +136,6 @@ let g:ycm_semantic_triggers =  {
     \ 'ruby'       : ['.', '::'],
     \ 'lua'        : ['.', ':'],
     \ 'erlang'     : [':'],
-    \ 'mail'       : ['re!^\w+:\s+'],
     \ }
 let g:ycm_error_symbol   = 'X>'                        " Symbol to show on lines with errors
 let g:ycm_warning_symbol = '>>'                        " Symbol to show on lines with warnings
