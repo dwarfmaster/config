@@ -12,6 +12,7 @@ filetype plugin indent on
 " }}}
 
 " {{{ Global configuration
+let mapleader=' '
 set background=dark                  " Adapt colors to a dark background
 set mouse=a                          " Enable use of mouse
 set autoindent                       " Keep indent on new lines
@@ -224,5 +225,39 @@ function! s:GetVisualSelection()
     let lines[0] = lines[0][col1 - 1:]
     return join(lines, '\n')
 endfunction
+" }}}
+
+" {{{ Notmuch-vim configuration
+let g:notmuch_folders = [
+    \ ['inbox', 'tag:inbox'],
+    \ ['unread', 'tag:unread'],
+    \ ['star', 'tag:star'],
+    \ ['', ''],
+    \ ['notmuch', 'tag:notmuch'],
+    \ ['archlinux', 'tag:archlinux'],
+    \ ['git', 'tag:git'],
+    \ ['others ml', 'tag:list and not tag:git and not tag:notmuch and not tag:archlinux'],
+    \ ['', ''],
+    \ ['mpsi', 'tag:mpsi'],
+    \ ['terminale', 'tag:terminale'],
+    \ ['lycee', 'tag:lycee'],
+    \ ['', ''],
+    \ ['dwarves', 'tag:dwarves'],
+    \ ['m9u', 'tag:m9u'],
+    \ ['prog', 'tag:prog'],
+    \ ['linux', 'tag:linux'],
+    \ ['', ''],
+    \ ['all', '*'],
+    \ ['spam', 'tag:spam'],
+    \ ['deleted', 'tag:deleted'],
+    \ ]
+let g:notmuch_sendmail_param = {
+    \ 'location': '/home/LOG1/Prog/nm_sendmail',
+    \ }
+let g:notmuch_sendmail = '/home/LOG1/Prog/nm_sendmail'
+let g:notmuch_show_folded_thread = 1
+let g:notmuch_show_folded_full_headers = 0
+let g:notmuch_compose_start_insert = 0
+let g:notmuch_save_sent_locally = 0
 " }}}
 
