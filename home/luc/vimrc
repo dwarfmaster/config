@@ -212,10 +212,6 @@ endfunction
 nnoremap ,8 :cal <SID>ToggleColorColumn()<cr>
 " }}}
 
-" {{{ Caml-light executor integration
-vmap <silent> <Enter> :'<,'>write >> /tmp/caml_light_fifo<cr>
-" }}}
-
 " {{{ Miscellaneous
 function! s:GetVisualSelection()
     let [lnum1, col1] = getpos("'<")[1:2]
