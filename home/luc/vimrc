@@ -241,7 +241,13 @@ let g:notmuch_folders = [
     \ ['dwarves', 'tag:dwarves'],
     \ ['m9u', 'tag:m9u'],
     \ ['prog', 'tag:prog'],
+    \ ['github', 'tag:github'],
     \ ['linux', 'tag:linux'],
+    \ ['', ''],
+    \ ['tapastic', 'tag:tapastic'],
+    \ ['avaaz', 'tag:avaaz'],
+    \ ['developpez.com', 'tag:developpez.com'],
+    \ ['sncf', 'tag:sncf'],
     \ ['', ''],
     \ ['all', '*'],
     \ ['spam', 'tag:spam'],
@@ -251,9 +257,12 @@ let g:notmuch_sendmail_param = {
     \ 'location': '/home/LOG1/Prog/nm_sendmail',
     \ }
 let g:notmuch_sendmail = '/home/LOG1/Prog/nm_sendmail'
+let g:notmuch_folders_display_unread_count = 1
 let g:notmuch_show_folded_thread = 1
 let g:notmuch_show_folded_full_headers = 0
 let g:notmuch_compose_start_insert = 0
 let g:notmuch_save_sent_locally = 0
+let g:notmuch_gpg_enable = 1
+let g:notmuch_gpg_pinentry = 1
 " }}}
 
